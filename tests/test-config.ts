@@ -33,6 +33,11 @@ test('processPlatformTraits native', () => {
 });
 
 test('createAndGetConfigPath uses XDG_CONFIG_HOME on Linux', () => {
+  // Skip this test on non-Linux platforms since XDG_CONFIG_HOME behavior is Linux-specific
+  if (process.platform !== 'linux') {
+    return;
+  }
+  
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'itch-dl-test-'));
   const old = process.env.XDG_CONFIG_HOME;
   process.env.XDG_CONFIG_HOME = tmp;
