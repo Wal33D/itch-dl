@@ -1,0 +1,44 @@
+{
+  "name": "itch-dl",
+  "version": "0.6.1",
+  "description": "Bulk download games from itch.io - TypeScript implementation",
+  "main": "build/src/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/src/index.js",
+    "test": "npm run build && node --test build/tests/test-*.js",
+    "itch-dl": "node build/src/index.js",
+    "clean": "rm -rf build",
+    "prepare": "npm run build"
+  },
+  "keywords": ["itch", "itch.io", "downloader", "games", "bulk-download"],
+  "author": "Wal33D",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "axios-retry": "^3.7.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cli-progress": "^3.12.0",
+    "commander": "^14.0.0",
+    "minimatch": "^9.0.1",
+    "adm-zip": "^0.5.16",
+    "tar": "^7.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.13",
+    "typescript": "^5.8.3",
+    "@types/adm-zip": "^0.5.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wal33D/itch-dl.git"
+  },
+  "homepage": "https://github.com/Wal33D/itch-dl",
+  "bugs": {
+    "url": "https://github.com/Wal33D/itch-dl/issues"
+  },
+  "bin": {
+    "itch-dl": "build/src/index.js"
+  }
+}
