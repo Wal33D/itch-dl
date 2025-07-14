@@ -9,8 +9,8 @@ import {
   preprocessJobUrls,
   getJobsForItchUrl,
   getJobsForUrlOrPath,
-} from '../handlers';
-import { Settings, DEFAULT_SETTINGS } from '../config';
+} from '../src/handlers';
+import { Settings, DEFAULT_SETTINGS } from '../src/config';
 
 class DummyClient {
   async get() {

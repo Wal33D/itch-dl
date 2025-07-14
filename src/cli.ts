@@ -2,7 +2,7 @@ import { Command } from 'commander';
 import path from 'node:path';
 import fs from 'node:fs';
 
-import pkg from './package.json';
+import pkg from '../package.json';
 import { Settings, loadConfig } from './config';
 import { ItchApiClient } from './api';
 import { getJobsForUrlOrPath, preprocessJobUrls } from './handlers';
