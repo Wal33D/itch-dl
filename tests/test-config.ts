@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { processPlatformTraits, createAndGetConfigPath, loadConfig } from '../config';
+import { processPlatformTraits, createAndGetConfigPath, loadConfig } from '../src/config';
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';

@@ -6,9 +6,9 @@ import path from 'node:path';
 import os from 'node:os';
 import AdmZip from 'adm-zip';
 import * as tar from 'tar';
-import { GameDownloader } from '../downloader';
-import { DEFAULT_SETTINGS } from '../config';
-import { driveDownloads } from '../downloader';
+import { GameDownloader } from '../src/downloader';
+import { DEFAULT_SETTINGS } from '../src/config';
+import { driveDownloads } from '../src/downloader';
 import { SingleBar } from 'cli-progress';
 
 test('GameDownloader.getRatingJson and getMeta', () => {

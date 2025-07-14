@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import { load } from 'cheerio';
-import { parseInfobox } from '../infobox';
+import { parseInfobox } from '../src/infobox';
 
 test('parseInfobox extracts metadata blocks', () => {
   const html = `<div class="game_info_panel_widget"><table>

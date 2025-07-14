@@ -18,7 +18,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import os from 'node:os';
 import axiosPkg from 'axios/package.json';
-import pkg from './package.json';
+import pkg from '../package.json';
 
 export function processPlatformTraits(platforms?: string[]): string[] | undefined {
   if (!platforms || platforms.length === 0) {

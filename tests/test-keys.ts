@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert';
-import { loadKeysAndUrls, getDownloadKeys, getOwnedGames, getOwnedKeys } from '../keys';
+import { loadKeysAndUrls, getDownloadKeys, getOwnedGames, getOwnedKeys } from '../src/keys';
 
 class FakeClient {
   page = 0;
