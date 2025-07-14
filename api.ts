@@ -20,11 +20,13 @@ export class ItchApiClient {
     axiosRetry(this.client, {
       retries: 5,
       retryDelay: axiosRetry.exponentialDelay,
-      retryCondition: (error) => {
+      retryCondition: error => {
         const status = error.response?.status;
         const retryStatuses = [429, 500, 502, 503, 504];
-        return axiosRetry.isNetworkOrIdempotentRequestError(error) ||
-          (status !== undefined && retryStatuses.includes(status));
+        return (
+          axiosRetry.isNetworkOrIdempotentRequestError(error) ||
+          (status !== undefined && retryStatuses.includes(status))
+        );
       },
     });
   }
@@ -37,7 +39,7 @@ export class ItchApiClient {
   ): Promise<AxiosResponse> {
     const url = endpoint.startsWith('http') ? endpoint : this.baseUrl + endpoint;
     if (appendApiKey && this.apiKey) {
-      const params = { ...(config.params as Record<string, unknown> || {}) };
+      const params = { ...((config.params as Record<string, unknown>) || {}) };
       if (!('api_key' in params)) {
         params['api_key'] = this.apiKey;
       }

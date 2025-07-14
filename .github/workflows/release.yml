@@ -38,17 +38,17 @@ jobs:
           release_name: ${{ steps.get_version.outputs.VERSION }}
           body: |
             ## Changes in ${{ steps.get_version.outputs.VERSION }}
-            
+
             See [CHANGELOG.md](https://github.com/Wal33D/itch-dl/blob/main/CHANGELOG.md) for details.
-            
+
             ## Installation
-            
+
             ```bash
             npm install -g itch-dl@${{ steps.get_version.outputs.VERSION }}
             ```
-            
+
             ## Documentation
-            
+
             - 📖 [Complete Wiki](https://github.com/Wal33D/itch-dl/wiki)
             - 📦 [npm Package](https://www.npmjs.com/package/itch-dl)
           draft: false

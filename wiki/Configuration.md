@@ -4,7 +4,7 @@
 
 **Optimize itch-dl with config files, profiles, and environment variables**
 
-*Save time and customize your workflow*
+_Save time and customize your workflow_
 
 ---
 
@@ -13,6 +13,7 @@
 ## 🚀 Quick Start
 
 ### ⚡ Basic Setup
+
 ```bash
 # 1. Create config directory (auto-created on first run)
 itch-dl --help
@@ -26,6 +27,7 @@ itch-dl https://itch.io/jam/gmtk-2023
 ```
 
 ### 🎯 Why Use Configuration?
+
 - ✅ **No more typing** `--api-key` every time
 - ✅ **Save common settings** (download paths, filters, etc.)
 - ✅ **Multiple profiles** for different use cases
@@ -53,6 +55,7 @@ itch-dl follows platform conventions for config files:
 </table>
 
 ### 🔍 Find Your Config Path
+
 ```bash
 # The config directory is created automatically
 itch-dl --help  # Creates directory structure
@@ -86,19 +89,19 @@ Here's every setting you can configure:
 
 ```json
 {
-  "apiKey": "string",                    // Your itch.io API key
-  "userAgent": "string",                 // Custom user agent
-  "downloadTo": "string",                // Default download directory
-  "mirrorWeb": false,                    // Download web assets
-  "urlsOnly": false,                     // List URLs without downloading
-  "parallel": 1,                         // Number of parallel downloads
-  "filterFilesPlatform": ["windows"],    // Platform filter
-  "filterFilesType": ["default"],        // File type filter
-  "filterFilesGlob": "string",          // Glob pattern filter
-  "filterFilesRegex": "string",         // Regex pattern filter
-  "filterUrlsGlob": "string",           // URL glob filter
-  "filterUrlsRegex": "string",          // URL regex filter
-  "verbose": false                       // Enable verbose logging
+  "apiKey": "string", // Your itch.io API key
+  "userAgent": "string", // Custom user agent
+  "downloadTo": "string", // Default download directory
+  "mirrorWeb": false, // Download web assets
+  "urlsOnly": false, // List URLs without downloading
+  "parallel": 1, // Number of parallel downloads
+  "filterFilesPlatform": ["windows"], // Platform filter
+  "filterFilesType": ["default"], // File type filter
+  "filterFilesGlob": "string", // Glob pattern filter
+  "filterFilesRegex": "string", // Regex pattern filter
+  "filterUrlsGlob": "string", // URL glob filter
+  "filterUrlsRegex": "string", // URL regex filter
+  "verbose": false // Enable verbose logging
 }
 ```
 
@@ -107,6 +110,7 @@ Here's every setting you can configure:
 ## 🎯 Configuration Examples
 
 ### 💾 Basic User Config
+
 Perfect for most users:
 
 ```json
@@ -119,6 +123,7 @@ Perfect for most users:
 ```
 
 ### 🖥️ Windows Gamer Config
+
 Optimized for Windows gaming:
 
 ```json
@@ -133,6 +138,7 @@ Optimized for Windows gaming:
 ```
 
 ### 🎵 Music Collector Config
+
 Focus on soundtracks and audio:
 
 ```json
@@ -147,6 +153,7 @@ Focus on soundtracks and audio:
 ```
 
 ### 🔧 Developer Config
+
 For testing and development:
 
 ```json
@@ -160,6 +167,7 @@ For testing and development:
 ```
 
 ### 📦 Archival Config
+
 Complete preservation setup:
 
 ```json
@@ -207,6 +215,7 @@ mkdir %APPDATA%\itch-dl\profiles     # Windows
 ```
 
 **Profile: `windows-only`**
+
 ```json
 {
   "filterFilesPlatform": ["windows"],
@@ -216,6 +225,7 @@ mkdir %APPDATA%\itch-dl\profiles     # Windows
 ```
 
 **Profile: `soundtracks`**
+
 ```json
 {
   "filterFilesType": ["soundtrack"],
@@ -226,6 +236,7 @@ mkdir %APPDATA%\itch-dl\profiles     # Windows
 ```
 
 **Profile: `mobile`**
+
 ```json
 {
   "filterFilesPlatform": ["android"],
@@ -235,6 +246,7 @@ mkdir %APPDATA%\itch-dl\profiles     # Windows
 ```
 
 **Profile: `testing`**
+
 ```json
 {
   "urlsOnly": true,
@@ -351,6 +363,7 @@ itch-dl validates your configuration and provides helpful error messages:
 
 **Error**: `SyntaxError: Unexpected token`  
 **Fix**: Use proper JSON syntax with commas between properties
+
 </details>
 
 <details>
@@ -358,13 +371,14 @@ itch-dl validates your configuration and provides helpful error messages:
 
 ```json
 {
-  "parallel": "3",    // Should be number, not string
-  "verbose": "true"   // Should be boolean, not string
+  "parallel": "3", // Should be number, not string
+  "verbose": "true" // Should be boolean, not string
 }
 ```
 
 **Error**: `Settings.parallel has invalid type 'string', expected 'number'`  
 **Fix**: Use correct data types (numbers, booleans, arrays)
+
 </details>
 
 <details>
@@ -373,13 +387,14 @@ itch-dl validates your configuration and provides helpful error messages:
 ```json
 {
   "apiKey": "test",
-  "paralell": 3,     // Typo: should be "parallel"
+  "paralell": 3, // Typo: should be "parallel"
   "unknownSetting": true
 }
 ```
 
 **Warning**: `Settings contain an unknown item, ignoring: 'paralell'`  
 **Fix**: Check spelling and refer to valid setting names
+
 </details>
 
 ### ✅ Validate Your Config
@@ -418,6 +433,7 @@ itch-dl URL --profile archive
 Save these as starting points:
 
 **Minimal Config** (`minimal.json`):
+
 ```json
 {
   "apiKey": "your-key-here"
@@ -425,6 +441,7 @@ Save these as starting points:
 ```
 
 **Complete Config** (`complete.json`):
+
 ```json
 {
   "apiKey": "your-key-here",
@@ -481,6 +498,7 @@ itch-dl --verbose --help
 **Problem**: itch-dl can't find your config file
 
 **Solutions**:
+
 ```bash
 # Check if directory exists
 ls ~/.config/itch-dl/  # Linux
@@ -493,6 +511,7 @@ mkdir -p ~/Library/Application\ Support/itch-dl/  # macOS
 # Check file permissions
 ls -la ~/.config/itch-dl/config.json
 ```
+
 </details>
 
 <details>
@@ -501,6 +520,7 @@ ls -la ~/.config/itch-dl/config.json
 **Problem**: `--profile profilename` fails
 
 **Solutions**:
+
 ```bash
 # Check if profile exists
 ls ~/.config/itch-dl/profiles/profilename
@@ -511,6 +531,7 @@ ls ~/.config/itch-dl/profiles/
 # Create missing profile
 echo '{"parallel": 2}' > ~/.config/itch-dl/profiles/profilename
 ```
+
 </details>
 
 <details>
@@ -519,6 +540,7 @@ echo '{"parallel": 2}' > ~/.config/itch-dl/profiles/profilename
 **Problem**: `ITCH_API_KEY` not recognized
 
 **Solutions**:
+
 ```bash
 # Check if variable is set
 echo $ITCH_API_KEY
@@ -530,6 +552,7 @@ export ITCH_API_KEY="your-key"
 echo 'export ITCH_API_KEY="your-key"' >> ~/.bashrc
 source ~/.bashrc
 ```
+
 </details>
 
 ---
@@ -539,6 +562,7 @@ source ~/.bashrc
 ### 🏢 Team/Organization Setup
 
 **Shared config template** (remove API key before sharing):
+
 ```json
 {
   "userAgent": "CompanyName-itch-dl/1.0",
@@ -550,6 +574,7 @@ source ~/.bashrc
 ```
 
 **Individual developer adds:**
+
 ```bash
 export ITCH_API_KEY="individual-dev-key"
 ```
@@ -557,6 +582,7 @@ export ITCH_API_KEY="individual-dev-key"
 ### 🎮 Gaming Setup
 
 **Base config**:
+
 ```json
 {
   "apiKey": "your-key",
@@ -566,11 +592,12 @@ export ITCH_API_KEY="individual-dev-key"
 ```
 
 **Platform-specific profiles**:
+
 ```bash
 # profiles/windows
 {"filterFilesPlatform": ["windows"], "downloadTo": "/Games/itch-windows"}
 
-# profiles/linux  
+# profiles/linux
 {"filterFilesPlatform": ["linux"], "downloadTo": "/Games/itch-linux"}
 
 # profiles/retro
@@ -580,6 +607,7 @@ export ITCH_API_KEY="individual-dev-key"
 ### 📦 Automated Backup
 
 **CI/CD config**:
+
 ```bash
 #!/bin/bash
 export ITCH_API_KEY="$SECRET_API_KEY"
@@ -600,7 +628,7 @@ itch-dl https://itch.io/my-purchases \
 ✅ **Use profiles** - Create profiles for different scenarios  
 ✅ **Secure API keys** - Never commit real keys to version control  
 ✅ **Test first** - Use `--urls-only` to test configurations  
-✅ **Document profiles** - Add comments explaining each profile's purpose  
+✅ **Document profiles** - Add comments explaining each profile's purpose
 
 ---
 

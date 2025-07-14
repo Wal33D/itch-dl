@@ -30,7 +30,9 @@ export interface InfoboxMetadata {
 
 function parseDateBlock(td: Cheerio<any>): Date | null {
   const abbr = td.find('abbr');
-  if (!abbr || !abbr.attr('title')) return null;
+  if (!abbr || !abbr.attr('title')) {
+    return null;
+  }
   const [dateStr, timeStr] = abbr.attr('title')!.split('@');
   const date = new Date(dateStr.trim() + ' UTC');
   const time = timeStr.trim();
@@ -118,7 +120,9 @@ export function parseInfobox(infoboxHtml: Cheerio<any>): InfoboxMetadata {
   $ibox('tr').each((_, tr) => {
     const $tr = $ibox(tr);
     const tds = $tr.find('td');
-    if (tds.length < 2) return;
+    if (tds.length < 2) {
+      return;
+    }
     const name = $ibox(tds[0]).text().trim();
     const parsed = parseTr(name, $ibox(tds[1]));
     if (parsed) {

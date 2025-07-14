@@ -12,10 +12,14 @@ export function getIntAfterMarkerInJson(text: string, marker: string, key: strin
       break;
     }
   }
-  if (!markerLine) return null;
+  if (!markerLine) {
+    return null;
+  }
   const regex = new RegExp(`\\"${key}\\":\\s?(\\d+)`);
   const match = markerLine.match(regex);
-  if (!match) return null;
+  if (!match) {
+    return null;
+  }
   return parseInt(match[1], 10);
 }
 
@@ -28,7 +32,7 @@ export function shouldSkipItemByGlob(kind: 'File' | 'URL', item: string, glob?: 
 }
 
 export function shouldSkipItemByRegex(kind: 'File' | 'URL', item: string, regex?: string): boolean {
-  if (regex && !(new RegExp(`^${regex}$`).test(item))) {
+  if (regex && !new RegExp(`^${regex}$`).test(item)) {
     console.info(`${kind} '${item}' does not match the regex filter '${regex}', skipping`);
     return true;
   }

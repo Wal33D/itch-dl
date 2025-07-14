@@ -9,9 +9,11 @@
 
 **Bulk download games from [itch.io](https://itch.io/) with ease**
 
-*TypeScript implementation for modern Node.js environments*
+_TypeScript implementation for modern Node.js environments_
 
-[🚀 Quick Start](#-quick-start) • [📖 Documentation](https://github.com/Wal33D/itch-dl/wiki) • [💾 Installation](#-installation) • [🎯 Examples](#-usage-examples)
+[🚀 Quick Start](#-quick-start) •
+[📖 Documentation](https://github.com/Wal33D/itch-dl/wiki) •
+[💾 Installation](#-installation) • [🎯 Examples](#-usage-examples)
 
 </div>
 
@@ -20,14 +22,19 @@
 ## ✨ Features
 
 ### 🎯 What You Can Download
-- 🏆 **Game Jams** - All submissions from any [itch.io game jam](https://itch.io/jams)
-- 🔥 **Browse Pages** - Popular games, newest releases, or games by specific tags
+
+- 🏆 **Game Jams** - All submissions from any
+  [itch.io game jam](https://itch.io/jams)
+- 🔥 **Browse Pages** - Popular games, newest releases, or games by specific
+  tags
 - 📂 **Collections** - Your personal collections or any public collection
-- 📚 **Your Library** - Everything you own from [your purchases](https://itch.io/my-purchases)
+- 📚 **Your Library** - Everything you own from
+  [your purchases](https://itch.io/my-purchases)
 - 👨‍💻 **Creator Pages** - Complete catalogues from specific developers
 - 🎮 **Individual Games** - Single games or specific titles
 
 ### 🛠️ Powerful Features
+
 - ⚡ **Parallel Downloads** - Speed up bulk downloads with concurrent processing
 - 🎯 **Smart Filtering** - Filter by platform, file type, or custom patterns
 - 📋 **Multiple Input Formats** - URLs, JSON files, or plain text lists
@@ -40,14 +47,18 @@
 ## 🚀 Quick Start
 
 ### 1️⃣ Install globally via npm
+
 ```bash
 npm install -g itch-dl
 ```
 
 ### 2️⃣ Get your itch.io API key
-Visit [itch.io API Keys](https://itch.io/user/settings/api-keys) and generate a new key
+
+Visit [itch.io API Keys](https://itch.io/user/settings/api-keys) and generate a
+new key
 
 ### 3️⃣ Start downloading!
+
 ```bash
 # Download a game jam
 itch-dl https://itch.io/jam/gmtk-2023 --api-key YOUR_API_KEY
@@ -56,36 +67,44 @@ itch-dl https://itch.io/jam/gmtk-2023 --api-key YOUR_API_KEY
 itch-dl https://itch.io/my-purchases --api-key YOUR_API_KEY
 ```
 
-> 💡 **Tip**: Save your API key in a [config file](https://github.com/Wal33D/itch-dl/wiki/Configuration) to avoid typing it every time!
+> 💡 **Tip**: Save your API key in a
+> [config file](https://github.com/Wal33D/itch-dl/wiki/Configuration) to avoid
+> typing it every time!
 
 ---
 
 ## 💾 Installation
 
 ### Prerequisites
+
 - **Node.js 18+** - [Download here](https://nodejs.org/)
 - **npm** (comes with Node.js)
 - **itch.io account** with [API key](https://itch.io/user/settings/api-keys)
 
 ### 📦 Install from npm (Recommended)
+
 ```bash
 npm install -g itch-dl
 ```
 
 ### 🔧 Install from source
+
 ```bash
 git clone https://github.com/Wal33D/itch-dl.git
 cd itch-dl
 npm install && npm run build
 ```
 
-📚 **Need help?** Check the [Installation Guide](https://github.com/Wal33D/itch-dl/wiki/Installation) for detailed instructions.
+📚 **Need help?** Check the
+[Installation Guide](https://github.com/Wal33D/itch-dl/wiki/Installation) for
+detailed instructions.
 
 ---
 
 ## 🎯 Usage Examples
 
 ### Basic Downloads
+
 ```bash
 # Game jam with all submissions
 itch-dl https://itch.io/jam/brackeys-12 --api-key YOUR_KEY
@@ -101,6 +120,7 @@ itch-dl https://itch.io/c/123456/cool-games --api-key YOUR_KEY
 ```
 
 ### Filtered Downloads
+
 ```bash
 # Only Windows games
 itch-dl https://itch.io/jam/gmtk-2023 --filter-files-platform windows --api-key YOUR_KEY
@@ -113,6 +133,7 @@ itch-dl https://itch.io/my-purchases --filter-files-platform windows mac linux -
 ```
 
 ### Advanced Usage
+
 ```bash
 # Fast parallel downloads (3 threads)
 itch-dl https://itch.io/jam/gmtk-2023 --parallel 3 --api-key YOUR_KEY
@@ -128,6 +149,7 @@ itch-dl https://some-game.itch.io/game --mirror-web --api-key YOUR_KEY
 ```
 
 ### Using Configuration Files
+
 ```bash
 # Use a specific profile
 itch-dl https://itch.io/jam/gmtk-2023 --profile windows-only
@@ -140,36 +162,43 @@ itch-dl --help
 
 ## 📚 Documentation
 
-| 📖 Guide | Description |
-|----------|-------------|
-| [Usage Guide](https://github.com/Wal33D/itch-dl/wiki/Usage) | Complete command-line reference with examples |
-| [API Keys](https://github.com/Wal33D/itch-dl/wiki/API-Keys) | How to get and securely use your itch.io API key |
-| [Configuration](https://github.com/Wal33D/itch-dl/wiki/Configuration) | Config files, profiles, and environment variables |
-| [Installation](https://github.com/Wal33D/itch-dl/wiki/Installation) | Detailed installation instructions and troubleshooting |
+| 📖 Guide                                                              | Description                                            |
+| --------------------------------------------------------------------- | ------------------------------------------------------ |
+| [Usage Guide](https://github.com/Wal33D/itch-dl/wiki/Usage)           | Complete command-line reference with examples          |
+| [API Keys](https://github.com/Wal33D/itch-dl/wiki/API-Keys)           | How to get and securely use your itch.io API key       |
+| [Configuration](https://github.com/Wal33D/itch-dl/wiki/Configuration) | Config files, profiles, and environment variables      |
+| [Installation](https://github.com/Wal33D/itch-dl/wiki/Installation)   | Detailed installation instructions and troubleshooting |
 
 ---
 
 ## ⚠️ Important Notes
 
 ### ✅ What This Tool Does
+
 - Downloads games you **legitimately own** or have access to
 - Respects itch.io's terms of service and rate limits
 - Provides the same access as the official itch.io app
 
 ### ❌ What This Tool Does NOT Do
+
 - Download paid games for free (you must own them)
 - Bypass access restrictions or DRM
-- Download from bundles directly ([workaround available](https://github.com/Wal33D/itch-dl/wiki/Usage#bundles))
+- Download from bundles directly
+  ([workaround available](https://github.com/Wal33D/itch-dl/wiki/Usage#bundles))
 
 ### 🚧 Current Limitations
-- **Access-restricted games** - Not supported ([#16](https://github.com/Wal33D/itch-dl/issues/16))
-- **Bundles** - Requires workaround ([#11](https://github.com/Wal33D/itch-dl/issues/11))
+
+- **Access-restricted games** - Not supported
+  ([#16](https://github.com/Wal33D/itch-dl/issues/16))
+- **Bundles** - Requires workaround
+  ([#11](https://github.com/Wal33D/itch-dl/issues/11))
 
 ---
 
 ## 🔧 Development
 
 ### Building & Testing
+
 ```bash
 git clone https://github.com/Wal33D/itch-dl.git
 cd itch-dl
@@ -182,6 +211,7 @@ npm run clean       # Clean build artifacts
 ```
 
 ### Running from Source
+
 ```bash
 npm run build
 node build/src/index.js --help
@@ -202,6 +232,7 @@ We welcome contributions! Here's how to get started:
 7. 🔄 **Open** a Pull Request
 
 ### Development Guidelines
+
 - Follow existing code style and conventions
 - Add tests for new features
 - Update documentation as needed
@@ -211,14 +242,16 @@ We welcome contributions! Here's how to get started:
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE)
+file for details.
 
 ---
 
 ## 🙏 Credits & Acknowledgments
 
 - **Author**: [Wal33D](https://github.com/Wal33D)
-- **Contributors**: [See all contributors](https://github.com/Wal33D/itch-dl/graphs/contributors)
+- **Contributors**:
+  [See all contributors](https://github.com/Wal33D/itch-dl/graphs/contributors)
 - **Inspired by**: The original Python implementation concept
 
 ---
@@ -240,6 +273,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 **Made with ❤️ for the itch.io community**
 
-*If this tool helped you, consider ⭐ starring the repository!*
+_If this tool helped you, consider ⭐ starring the repository!_
 
 </div>

@@ -4,7 +4,7 @@
 
 **Master itch-dl with comprehensive examples and command reference**
 
-*From basic downloads to advanced filtering and automation*
+_From basic downloads to advanced filtering and automation_
 
 ---
 
@@ -13,6 +13,7 @@
 ## 🚀 Quick Reference
 
 ### ⚡ Essential Commands
+
 ```bash
 # Basic download
 itch-dl <URL> --api-key YOUR_KEY
@@ -23,11 +24,12 @@ itch-dl <URL> --urls-only --api-key YOUR_KEY
 # Download with filters
 itch-dl <URL> --filter-files-platform windows --api-key YOUR_KEY
 
-# Fast parallel downloads  
+# Fast parallel downloads
 itch-dl <URL> --parallel 3 --api-key YOUR_KEY
 ```
 
 ### 📋 Input Formats
+
 - 🔗 **itch.io URLs** - Games, jams, collections, profiles
 - 📄 **JSON files** - Game jam entries, exported data
 - 📝 **Text files** - Lists of URLs (one per line)
@@ -37,6 +39,7 @@ itch-dl <URL> --parallel 3 --api-key YOUR_KEY
 ## 🎯 Basic Examples
 
 ### 🏆 Game Jams
+
 ```bash
 # Download all submissions from a game jam
 itch-dl https://itch.io/jam/brackeys-12 --api-key YOUR_KEY
@@ -48,6 +51,7 @@ itch-dl https://itch.io/jam/mini-jam-150 --api-key YOUR_KEY
 ```
 
 ### 📚 Your Library
+
 ```bash
 # Download everything you own
 itch-dl https://itch.io/my-purchases --api-key YOUR_KEY
@@ -60,6 +64,7 @@ itch-dl https://itch.io/my-purchases \
 ```
 
 ### 📂 Collections
+
 ```bash
 # Public collection
 itch-dl https://itch.io/c/4187503/cool-indie-games --api-key YOUR_KEY
@@ -69,6 +74,7 @@ itch-dl https://itch.io/c/123456/favorites --api-key YOUR_KEY
 ```
 
 ### 👨‍💻 Creator Pages
+
 ```bash
 # All games from a specific creator
 itch-dl https://dani-games.itch.io/ --api-key YOUR_KEY
@@ -79,6 +85,7 @@ itch-dl https://itch.io/profile/pancelor --api-key YOUR_KEY
 ```
 
 ### 🔥 Browse Pages
+
 ```bash
 # Popular games
 itch-dl https://itch.io/games/popular --api-key YOUR_KEY
@@ -92,6 +99,7 @@ itch-dl https://itch.io/games/tag-platformer --api-key YOUR_KEY
 ```
 
 ### 🎮 Individual Games
+
 ```bash
 # Single game download
 itch-dl https://maddymakesgamesinc.itch.io/celeste --api-key YOUR_KEY
@@ -121,8 +129,9 @@ itch-dl URL --filter-files-platform native --api-key YOUR_KEY
 ```
 
 **Platform aliases supported:**
+
 - `windows`, `win` → Windows
-- `linux`, `lin` → Linux  
+- `linux`, `lin` → Linux
 - `mac`, `osx`, `darwin` → macOS
 - `android`, `and` → Android
 - `native` → Your current platform
@@ -154,6 +163,7 @@ itch-dl URL --filter-files-type default soundtrack --api-key YOUR_KEY
 ### 🔍 Pattern Filtering
 
 #### Glob Patterns (Shell-style wildcards)
+
 ```bash
 # Only ZIP files
 itch-dl URL --filter-files-glob "*.zip" --api-key YOUR_KEY
@@ -169,6 +179,7 @@ itch-dl URL --filter-files-glob "!*.txt" --api-key YOUR_KEY
 ```
 
 #### Regular Expressions
+
 ```bash
 # Files ending in .exe or .zip
 itch-dl URL --filter-files-regex "\.(exe|zip)$" --api-key YOUR_KEY
@@ -318,7 +329,7 @@ download-directory/
 ├── creator1/
 │   └── game1/
 │       ├── metadata.json      # Game info & ratings
-│       ├── site.html          # Game page HTML  
+│       ├── site.html          # Game page HTML
 │       ├── cover.jpg          # Cover art
 │       ├── files/             # Downloadable files
 │       │   ├── game.zip
@@ -362,6 +373,7 @@ Notes for https://creator.itch.io/game:
 <summary><strong>❌ "You did not provide an API key"</strong></summary>
 
 **Solutions:**
+
 ```bash
 # Check if API key is set
 echo $ITCH_API_KEY
@@ -376,12 +388,14 @@ itch-dl URL --api-key YOUR_KEY
 cat ~/.config/itch-dl/config.json  # Linux
 cat ~/Library/Application\ Support/itch-dl/config.json  # macOS
 ```
+
 </details>
 
 <details>
 <summary><strong>❌ "API key appears to be invalid"</strong></summary>
 
 **Solutions:**
+
 ```bash
 # Test API key manually
 curl "https://api.itch.io/profile?api_key=YOUR_KEY"
@@ -389,12 +403,14 @@ curl "https://api.itch.io/profile?api_key=YOUR_KEY"
 # Generate new key at: https://itch.io/user/settings/api-keys
 # Make sure you copied the entire key
 ```
+
 </details>
 
 <details>
 <summary><strong>❌ "No URLs to download"</strong></summary>
 
 **Causes & Solutions:**
+
 - **All filtered out**: Check your filter settings
 - **Already downloaded**: Use `--verbose` to see skipped files
 - **Invalid URL**: Verify the itch.io URL is correct
@@ -410,18 +426,21 @@ itch-dl URL --api-key YOUR_KEY
 # Check if URLs are found
 itch-dl URL --urls-only --api-key YOUR_KEY
 ```
+
 </details>
 
 <details>
 <summary><strong>❌ "Download failed" for specific games</strong></summary>
 
 **Common reasons:**
+
 - **External files**: Hosted on Google Drive, Dropbox, etc.
 - **Size mismatch**: Download interrupted or corrupted
 - **Access restricted**: Need special permissions
 - **File moved**: Creator updated/removed files
 
 **Solutions:**
+
 - Check the error report for external URLs
 - Try downloading again (may be temporary)
 - Contact creator for external downloads
@@ -437,7 +456,7 @@ itch-dl URL --verbose --api-key YOUR_KEY
 
 # This shows:
 # - Configuration loading
-# - URL processing steps  
+# - URL processing steps
 # - API requests
 # - File download progress
 # - Error details
@@ -448,6 +467,7 @@ itch-dl URL --verbose --api-key YOUR_KEY
 ## 🎯 Real-World Examples
 
 ### 🏆 Complete Game Jam Archive
+
 ```bash
 # Download entire GMTK 2023 jam
 itch-dl https://itch.io/jam/gmtk-2023 \
@@ -458,6 +478,7 @@ itch-dl https://itch.io/jam/gmtk-2023 \
 ```
 
 ### 🖥️ Platform-Specific Collection
+
 ```bash
 # Windows games only to specific drive
 itch-dl https://itch.io/my-purchases \
@@ -468,6 +489,7 @@ itch-dl https://itch.io/my-purchases \
 ```
 
 ### 🎵 Soundtrack Collection
+
 ```bash
 # Only download music files
 itch-dl https://itch.io/my-purchases \
@@ -477,6 +499,7 @@ itch-dl https://itch.io/my-purchases \
 ```
 
 ### 📱 Mobile Games Archive
+
 ```bash
 # Android games with APK files
 itch-dl https://itch.io/games/platform-android \
@@ -487,6 +510,7 @@ itch-dl https://itch.io/games/platform-android \
 ```
 
 ### 🔍 Filtered Creator Archive
+
 ```bash
 # Specific creator, Windows executables only
 itch-dl https://dani-games.itch.io/ \
@@ -542,9 +566,11 @@ itch-dl windows_games.txt --api-key YOUR_KEY
 
 ## 🎮 Ready to Download!
 
-**Pro tip**: Start with a small jam (like `--urls-only`) to test your setup before downloading large collections.
+**Pro tip**: Start with a small jam (like `--urls-only`) to test your setup
+before downloading large collections.
 
-Need more help? Check [Configuration](Configuration.md) or [API Keys](API-Keys.md) guides.
+Need more help? Check [Configuration](Configuration.md) or
+[API Keys](API-Keys.md) guides.
 
 ---
 

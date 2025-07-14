@@ -12,8 +12,9 @@ import { driveDownloads } from '../downloader';
 import { SingleBar } from 'cli-progress';
 
 test('GameDownloader.getRatingJson and getMeta', () => {
-  const html = `<script type="application/ld+json">{"@type":"Product","name":"G"}</script>`+
-               `<meta property="og:image" content="img.png">`;
+  const html =
+    `<script type="application/ld+json">{"@type":"Product","name":"G"}</script>` +
+    `<meta property="og:image" content="img.png">`;
   const $ = load(html);
   const json = GameDownloader.getRatingJson($);
   assert.deepStrictEqual(json, { '@type': 'Product', name: 'G' });
@@ -59,10 +60,12 @@ test('driveDownloads runs downloads concurrently and reports progress', async ()
   let active = 0;
   let maxActive = 0;
   let calls = 0;
-  GameDownloader.prototype.download = async function(url: string) {
+  GameDownloader.prototype.download = async function (url: string) {
     active++;
     calls++;
-    if (active > maxActive) maxActive = active;
+    if (active > maxActive) {
+      maxActive = active;
+    }
     await new Promise(res => setTimeout(res, 50));
     active--;
     return { url, success: true, errors: [], external_urls: [] };
@@ -73,41 +76,56 @@ test('driveDownloads runs downloads concurrently and reports progress', async ()
   const origIncrement = proto.increment;
   const origStop = proto.stop;
   const events: any[] = [];
-  proto.start = function(total: number, start: number) { events.push(['start', total, start]); };
-  proto.increment = function() { events.push(['inc']); };
-  proto.stop = function() { events.push(['stop']); };
+  proto.start = function (total: number, start: number) {
+    events.push(['start', total, start]);
+  };
+  proto.increment = function () {
+    events.push(['inc']);
+  };
+  proto.stop = function () {
+    events.push(['stop']);
+  };
 
   const settings = { ...DEFAULT_SETTINGS, parallel: 2 };
   await driveDownloads(['u1', 'u2', 'u3'], settings, {});
 
   GameDownloader.prototype.download = origDownload;
-  proto.start = origStart; proto.increment = origIncrement; proto.stop = origStop;
+  proto.start = origStart;
+  proto.increment = origIncrement;
+  proto.stop = origStop;
 
   assert.strictEqual(calls, 3);
   assert.ok(maxActive > 1);
-  assert.deepStrictEqual(events, [
-    ['start', 3, 0],
-    ['inc'],
-    ['inc'],
-    ['inc'],
-    ['stop'],
-  ]);
+  assert.deepStrictEqual(events, [['start', 3, 0], ['inc'], ['inc'], ['inc'], ['stop']]);
 });
 
 test('driveDownloads updates progress and concurrency', async () => {
   const cliProgress = require('cli-progress');
   const OriginalBar = cliProgress.SingleBar;
-  const events: { start?: any[]; increments: number; stopped: boolean } = { increments: 0, stopped: false };
+  const events: { start?: any[]; increments: number; stopped: boolean } = {
+    increments: 0,
+    stopped: false,
+  };
   class FakeBar {
-    start(...args: any[]) { events.start = args; }
-    increment() { events.increments++; }
-    stop() { events.stopped = true; }
+    start(...args: any[]) {
+      events.start = args;
+    }
+    increment() {
+      events.increments++;
+    }
+    stop() {
+      events.stopped = true;
+    }
   }
-  cliProgress.SingleBar = class { constructor() { return new FakeBar(); } } as any;
+  cliProgress.SingleBar = class {
+    constructor() {
+      return new FakeBar();
+    }
+  } as any;
 
   const origDownload = GameDownloader.prototype.download;
   const starts: number[] = [];
-  GameDownloader.prototype.download = async function(url: string) {
+  GameDownloader.prototype.download = async function (url: string) {
     starts.push(Date.now());
     await new Promise(res => setTimeout(res, 50));
     return { url, success: true, errors: [], external_urls: [] };

@@ -1,7 +1,12 @@
 import fs from 'node:fs';
 import { load } from 'cheerio';
 import { ItchApiClient } from './api';
-import { ItchDownloadError, getIntAfterMarkerInJson, shouldSkipItemByGlob, shouldSkipItemByRegex } from './utils';
+import {
+  ItchDownloadError,
+  getIntAfterMarkerInJson,
+  shouldSkipItemByGlob,
+  shouldSkipItemByRegex,
+} from './utils';
 import { ITCH_API, ITCH_BASE, ITCH_URL, ITCH_BROWSER_TYPES } from './consts';
 import { Settings } from './config';
 import { getOwnedGames } from './keys';
@@ -16,7 +21,9 @@ export function getJobsForGameJamJson(gameJamJson: any): string[] {
 export async function getGameJamJson(jamUrl: string, client: ItchApiClient): Promise<any> {
   const r = await client.get(jamUrl, false);
   if (r.status !== 200) {
-    throw new ItchDownloadError(`Could not download the game jam site: ${r.status} ${r.statusText}`);
+    throw new ItchDownloadError(
+      `Could not download the game jam site: ${r.status} ${r.statusText}`
+    );
   }
   const jamId = getIntAfterMarkerInJson(r.data, 'I.ViewJam', 'id');
   if (jamId === null) {
@@ -26,7 +33,9 @@ export async function getGameJamJson(jamUrl: string, client: ItchApiClient): Pro
   }
   const r2 = await client.get(`${ITCH_URL}/jam/${jamId}/entries.json`);
   if (r2.status !== 200) {
-    throw new ItchDownloadError(`Could not download the game jam entries list: ${r2.status} ${r2.statusText}`);
+    throw new ItchDownloadError(
+      `Could not download the game jam entries list: ${r2.status} ${r2.statusText}`
+    );
   }
   return r2.data;
 }
@@ -36,13 +45,19 @@ export async function getJobsForBrowseUrl(url: string, client: ItchApiClient): P
   const found = new Set<string>();
   while (true) {
     const r = await client.get(`${url}.xml?page=${page}`, false);
-    if (r.status !== 200) break;
+    if (r.status !== 200) {
+      break;
+    }
     const $ = load(r.data, { xmlMode: true });
     const items = $('item');
-    if (items.length < 1) break;
+    if (items.length < 1) {
+      break;
+    }
     items.each((_, item) => {
       const link = $(item).find('link').text().trim();
-      if (link) found.add(link);
+      if (link) {
+        found.add(link);
+      }
     });
     page += 1;
   }
@@ -52,14 +67,21 @@ export async function getJobsForBrowseUrl(url: string, client: ItchApiClient): P
   return Array.from(found);
 }
 
-export async function getJobsForCollectionJson(url: string, client: ItchApiClient): Promise<string[]> {
+export async function getJobsForCollectionJson(
+  url: string,
+  client: ItchApiClient
+): Promise<string[]> {
   let page = 1;
   const found = new Set<string>();
   while (true) {
     const r = await client.get(url, true, false, { params: { page }, timeout: 15000 });
-    if (r.status !== 200) break;
+    if (r.status !== 200) {
+      break;
+    }
     const data = r.data;
-    if (data.collection_games.length < 1) break;
+    if (data.collection_games.length < 1) {
+      break;
+    }
     for (const item of data.collection_games) {
       found.add(item.game.url);
     }
@@ -78,7 +100,9 @@ export async function getJobsForCollectionJson(url: string, client: ItchApiClien
 export async function getJobsForCreator(creator: string, client: ItchApiClient): Promise<string[]> {
   const r = await client.get(`https://${ITCH_BASE}/profile/${creator}`, false);
   if (r.status !== 200) {
-    throw new ItchDownloadError(`Could not fetch the creator page: HTTP ${r.status} ${r.statusText}`);
+    throw new ItchDownloadError(
+      `Could not fetch the creator page: HTTP ${r.status} ${r.statusText}`
+    );
   }
   const prefix = `https://${creator}.${ITCH_BASE}/`;
   const $ = load(r.data);
@@ -100,13 +124,17 @@ export async function getJobsForItchUrl(url: string, client: ItchApiClient): Pro
     url = ITCH_URL + '/' + url.slice(20);
   }
   const urlObj = new URL(url);
-  const parts = urlObj.pathname.split('/').filter((x) => x.length > 0);
+  const parts = urlObj.pathname.split('/').filter(x => x.length > 0);
 
   if (urlObj.hostname === ITCH_BASE) {
-    if (parts.length === 0) throw new Error('itch-dl cannot download the entirety of itch.io.');
+    if (parts.length === 0) {
+      throw new Error('itch-dl cannot download the entirety of itch.io.');
+    }
     const site = parts[0];
     if (site === 'jam') {
-      if (parts.length < 2) throw new Error(`Incomplete game jam URL: ${url}`);
+      if (parts.length < 2) {
+        throw new Error(`Incomplete game jam URL: ${url}`);
+      }
       const clean = `${ITCH_URL}/jam/${parts[1]}`;
       const jamJson = await getGameJamJson(clean, client);
       return getJobsForGameJamJson(jamJson);
@@ -120,7 +148,9 @@ export async function getJobsForItchUrl(url: string, client: ItchApiClient): Pro
     } else if (['t', 'board', 'community'].includes(site)) {
       throw new Error('itch-dl cannot download forums.');
     } else if (site === 'profile') {
-      if (parts.length >= 2) return await getJobsForCreator(parts[1], client);
+      if (parts.length >= 2) {
+        return await getJobsForCreator(parts[1], client);
+      }
       throw new Error('itch-dl expects a username in profile links.');
     } else if (site === 'my-purchases') {
       return await getOwnedGames(client);
@@ -150,14 +180,21 @@ export function getJobsForPath(p: string): string[] {
     // ignore
   }
   const lines = fs.readFileSync(p, 'utf8').split(/\r?\n/);
-  const urlList = lines.filter((l) => l.startsWith('https://') || l.startsWith('http://'));
-  if (urlList.length > 0) return urlList;
+  const urlList = lines.filter(l => l.startsWith('https://') || l.startsWith('http://'));
+  if (urlList.length > 0) {
+    return urlList;
+  }
   throw new Error('File format is unknown - cannot read URLs to download.');
 }
 
-export async function getJobsForUrlOrPath(pathOrUrl: string, settings: Settings): Promise<string[]> {
+export async function getJobsForUrlOrPath(
+  pathOrUrl: string,
+  settings: Settings
+): Promise<string[]> {
   pathOrUrl = pathOrUrl.trim();
-  if (pathOrUrl.startsWith('http://')) pathOrUrl = 'https://' + pathOrUrl.slice(7);
+  if (pathOrUrl.startsWith('http://')) {
+    pathOrUrl = 'https://' + pathOrUrl.slice(7);
+  }
   if (pathOrUrl.startsWith('https://')) {
     const client = new ItchApiClient(settings.apiKey, settings.userAgent);
     return await getJobsForItchUrl(pathOrUrl, client);
@@ -171,8 +208,12 @@ export function preprocessJobUrls(jobs: string[], settings: Settings): string[] 
   const cleaned = new Set<string>();
   for (const baseJob of jobs) {
     const job = baseJob.trim();
-    if (shouldSkipItemByGlob('URL', job, settings.filterUrlsGlob)) continue;
-    if (shouldSkipItemByRegex('URL', job, settings.filterUrlsRegex)) continue;
+    if (shouldSkipItemByGlob('URL', job, settings.filterUrlsGlob)) {
+      continue;
+    }
+    if (shouldSkipItemByRegex('URL', job, settings.filterUrlsRegex)) {
+      continue;
+    }
     cleaned.add(job);
   }
   return Array.from(cleaned);

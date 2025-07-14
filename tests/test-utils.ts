@@ -2,7 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert';
 import { getIntAfterMarkerInJson, shouldSkipItemByGlob, shouldSkipItemByRegex } from '../utils';
 
-
 test('getIntAfterMarkerInJson returns number when marker exists', () => {
   const text = 'foo\nI.ViewGame({"id": 42})\nbar';
   assert.strictEqual(getIntAfterMarkerInJson(text, 'I.ViewGame', 'id'), 42);

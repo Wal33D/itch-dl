@@ -14,7 +14,9 @@ function setLogging(verbose: boolean): void {
   if (verbose) {
     console.debug = originalDebug;
   } else {
-    console.debug = () => { /* noop */ };
+    console.debug = () => {
+      /* noop */
+    };
   }
 }
 
@@ -31,18 +33,44 @@ function buildProgram(): Command {
     .option('--download-to <path>', 'directory to save results into (default: current working dir)')
     .option('--mirror-web', 'try to fetch assets on game sites')
     .option('--urls-only', 'print scraped game URLs without downloading them')
-    .option('--parallel <parallel>', 'how many threads to use for downloading games (default: 1)', (v) => parseInt(v, 10))
-    .option('--filter-files-platform <platforms...>', 'filter downloaded files by platform (windows, mac, linux, android, native), affects only executables')
-    .option('--filter-files-type <types...>', 'filter downloaded files by type (see wiki for valid values)')
-    .option('--filter-files-glob <glob>', 'filter downloaded files with a shell-style glob/fnmatch (unmatched files are skipped)')
-    .option('--filter-files-regex <regex>', 'filter downloaded files with a Python regex (unmatched files are skipped)')
-    .option('--filter-urls-glob <glob>', 'filter itch URLs with a shell-style glob/fnmatch (unmatched URLs are skipped)')
-    .option('--filter-urls-regex <regex>', 'filter itch URLs with a Python regex (unmatched URLs are skipped)')
+    .option(
+      '--parallel <parallel>',
+      'how many threads to use for downloading games (default: 1)',
+      v => parseInt(v, 10)
+    )
+    .option(
+      '--filter-files-platform <platforms...>',
+      'filter downloaded files by platform (windows, mac, linux, android, native), affects only executables'
+    )
+    .option(
+      '--filter-files-type <types...>',
+      'filter downloaded files by type (see wiki for valid values)'
+    )
+    .option(
+      '--filter-files-glob <glob>',
+      'filter downloaded files with a shell-style glob/fnmatch (unmatched files are skipped)'
+    )
+    .option(
+      '--filter-files-regex <regex>',
+      'filter downloaded files with a Python regex (unmatched files are skipped)'
+    )
+    .option(
+      '--filter-urls-glob <glob>',
+      'filter itch URLs with a shell-style glob/fnmatch (unmatched URLs are skipped)'
+    )
+    .option(
+      '--filter-urls-regex <regex>',
+      'filter itch URLs with a Python regex (unmatched URLs are skipped)'
+    )
     .option('--verbose', 'print verbose logs');
   return program;
 }
 
-export function parseArgs(argv: string[] = process.argv): { urlOrPath: string; settings: Partial<Settings>; profile?: string } {
+export function parseArgs(argv: string[] = process.argv): {
+  urlOrPath: string;
+  settings: Partial<Settings>;
+  profile?: string;
+} {
   const program = buildProgram();
   program.parse(argv);
   const opts = program.opts();
@@ -80,7 +108,7 @@ export async function run(argv: string[] = process.argv): Promise<void> {
   if (!settings.apiKey) {
     console.error(
       'You did not provide an API key which itch-dl requires.\n' +
-      'See https://github.com/Wal33D/itch-dl/wiki/API-Keys for more info.'
+        'See https://github.com/Wal33D/itch-dl/wiki/API-Keys for more info.'
     );
     return;
   }
@@ -90,7 +118,7 @@ export async function run(argv: string[] = process.argv): Promise<void> {
   if (profileReq.status !== 200) {
     console.error(
       `Provided API key appears to be invalid: ${profileReq.data}\n` +
-      'See https://github.com/Wal33D/itch-dl/wiki/API-Keys for more info.'
+        'See https://github.com/Wal33D/itch-dl/wiki/API-Keys for more info.'
     );
     return;
   }
@@ -107,7 +135,9 @@ export async function run(argv: string[] = process.argv): Promise<void> {
   }
 
   if (settings.urlsOnly) {
-    for (const job of jobs) console.log(job);
+    for (const job of jobs) {
+      console.log(job);
+    }
     return;
   }
 

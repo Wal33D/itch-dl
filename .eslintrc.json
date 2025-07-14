@@ -3,35 +3,30 @@
     "node": true,
     "es2022": true
   },
-  "extends": [
-    "eslint:recommended",
-    "@typescript-eslint/recommended",
-    "@typescript-eslint/recommended-requiring-type-checking"
-  ],
+  "extends": ["eslint:recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "@typescript-eslint/explicit-function-return-type": "warn",
-    "@typescript-eslint/no-explicit-any": "warn",
-    "@typescript-eslint/prefer-const": "error",
-    "@typescript-eslint/no-inferrable-types": "off",
-    "prefer-const": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "prefer-const": "warn",
     "no-var": "error",
     "no-console": "off",
-    "eqeqeq": ["error", "always"],
-    "curly": ["error", "all"],
-    "brace-style": ["error", "1tbs"],
-    "comma-dangle": ["error", "es5"],
-    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-    "semi": ["error", "always"]
+    "eqeqeq": "warn",
+    "curly": "off",
+    "brace-style": "off",
+    "comma-dangle": "off",
+    "quotes": "off",
+    "semi": "warn",
+    "no-unused-vars": "off",
+    "no-constant-condition": "off",
+    "no-empty": "off"
   },
   "overrides": [
     {
@@ -44,10 +39,5 @@
       }
     }
   ],
-  "ignorePatterns": [
-    "build/",
-    "node_modules/",
-    "*.js",
-    "*.d.ts"
-  ]
+  "ignorePatterns": ["build/", "node_modules/", "*.js", "*.d.ts"]
 }

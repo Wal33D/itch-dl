@@ -6,7 +6,12 @@ import * as tar from 'tar';
 import axios from 'axios';
 import { SingleBar, Presets } from 'cli-progress';
 import { ItchApiClient } from './api';
-import { ItchDownloadError, getIntAfterMarkerInJson, shouldSkipItemByGlob, shouldSkipItemByRegex } from './utils';
+import {
+  ItchDownloadError,
+  getIntAfterMarkerInJson,
+  shouldSkipItemByGlob,
+  shouldSkipItemByRegex,
+} from './utils';
 import { ITCH_GAME_URL_REGEX } from './consts';
 import { Settings } from './config';
 import { parseInfobox, InfoboxMetadata } from './infobox';
@@ -62,7 +67,9 @@ export class GameDownloader {
     for (let i = 0; i < scripts.length; i++) {
       try {
         const json = JSON.parse(site(scripts[i]).text().trim());
-        if (json['@type'] === 'Product') return json;
+        if (json['@type'] === 'Product') {
+          return json;
+        }
       } catch {
         continue;
       }
@@ -72,7 +79,9 @@ export class GameDownloader {
 
   static getMeta(site: CheerioAPI, selector: string, attr: string = 'content'): string | null {
     const node = site(`meta[${selector}]`);
-    if (node.length === 0) return null;
+    if (node.length === 0) {
+      return null;
+    }
     return node.attr(attr) || null;
   }
 
@@ -90,7 +99,10 @@ export class GameDownloader {
         const text = site(scripts[i]).text().trim();
         if (text.includes('I.ViewGame')) {
           const v = getIntAfterMarkerInJson(text, 'I.ViewGame', 'id');
-          if (v !== null) { gameId = v; break; }
+          if (v !== null) {
+            gameId = v;
+            break;
+          }
         }
       }
     }
@@ -103,11 +115,15 @@ export class GameDownloader {
           if (data.errors) {
             throw new ItchDownloadError(`Game data fetching failed for ${url}: ${data.errors}`);
           }
-          if (data.id) gameId = parseInt(data.id, 10);
+          if (data.id) {
+            gameId = parseInt(data.id, 10);
+          }
         } catch {}
       }
     }
-    if (!gameId) throw new ItchDownloadError(`Could not get the Game ID for URL: ${url}`);
+    if (!gameId) {
+      throw new ItchDownloadError(`Could not get the Game ID for URL: ${url}`);
+    }
     return gameId;
   }
 
@@ -115,12 +131,16 @@ export class GameDownloader {
     const ratingJson = GameDownloader.getRatingJson(site);
     const title = ratingJson ? ratingJson.name : null;
     let description = GameDownloader.getMeta(site, 'property="og:description"');
-    if (!description) description = GameDownloader.getMeta(site, 'name="description"');
+    if (!description) {
+      description = GameDownloader.getMeta(site, 'name="description"');
+    }
     const screenshots: string[] = [];
     const screenshotsNode = site('div.screenshot_list');
     screenshotsNode.find('a').each((_, a) => {
       const href = site(a).attr('href');
-      if (href) screenshots.push(href);
+      if (href) {
+        screenshots.push(href);
+      }
     });
     const metadata: GameMetadata = {
       game_id: gameId,
@@ -133,7 +153,7 @@ export class GameDownloader {
     const infoboxDiv = site('div.game_info_panel_widget');
     if (infoboxDiv.length) {
       const infobox = parseInfobox(infoboxDiv);
-      for (const dt of ['created_at','updated_at','released_at','published_at']) {
+      for (const dt of ['created_at', 'updated_at', 'released_at', 'published_at']) {
         if (infobox[dt]) {
           metadata[dt] = (infobox[dt] as Date).toISOString();
           delete (infobox as any)[dt];
@@ -153,7 +173,10 @@ export class GameDownloader {
     const aggRating = ratingJson ? ratingJson.aggregateRating : null;
     if (aggRating) {
       try {
-        metadata.rating = { average: parseFloat(aggRating.ratingValue), votes: aggRating.ratingCount };
+        metadata.rating = {
+          average: parseFloat(aggRating.ratingValue),
+          votes: aggRating.ratingCount,
+        };
       } catch {
         // ignore
       }
@@ -185,7 +208,11 @@ export class GameDownloader {
       let total = 0;
       await tar.t({
         file: targetPath,
-        onentry: (entry: any) => { if (entry.type === 'File') total += entry.size; }
+        onentry: (entry: any) => {
+          if (entry.type === 'File') {
+            total += entry.size;
+          }
+        },
       });
       return total === 0 ? null : total;
     } catch {
@@ -195,9 +222,16 @@ export class GameDownloader {
     return null;
   }
 
-  async downloadFile(url: string, downloadPath: string | null, credentials: Record<string, any>): Promise<string> {
+  async downloadFile(
+    url: string,
+    downloadPath: string | null,
+    credentials: Record<string, any>
+  ): Promise<string> {
     try {
-      const res = await this.client.get(url, true, false, { responseType: 'stream', data: credentials });
+      const res = await this.client.get(url, true, false, {
+        responseType: 'stream',
+        data: credentials,
+      });
       if (downloadPath) {
         await new Promise<void>((resolve, reject) => {
           const writer = fs.createWriteStream(downloadPath);
@@ -212,14 +246,23 @@ export class GameDownloader {
     }
   }
 
-  async downloadFileByUploadId(uploadId: number, downloadPath: string | null, credentials: Record<string, any>): Promise<string> {
+  async downloadFileByUploadId(
+    uploadId: number,
+    downloadPath: string | null,
+    credentials: Record<string, any>
+  ): Promise<string> {
     return this.downloadFile(`/uploads/${uploadId}/download`, downloadPath, credentials);
   }
 
   async download(url: string, skipDownloaded: boolean = true): Promise<DownloadResult> {
     const match = url.match(ITCH_GAME_URL_REGEX);
     if (!match || !match.groups) {
-      return { url, success: false, errors: [`Game URL is invalid: ${url} - please file a new issue.`], external_urls: [] };
+      return {
+        url,
+        success: false,
+        errors: [`Game URL is invalid: ${url} - please file a new issue.`],
+        external_urls: [],
+      };
     }
     const author = match.groups.author;
     const game = match.groups.game;
@@ -238,7 +281,12 @@ export class GameDownloader {
       const r = await this.client.get(url, false);
       siteHtml = r.data;
     } catch (e: any) {
-      return { url, success: false, errors: [`Could not download the game site for ${url}: ${e}`], external_urls: [] };
+      return {
+        url,
+        success: false,
+        errors: [`Could not download the game site for ${url}: ${e}`],
+        external_urls: [],
+      };
     }
     const $ = load(siteHtml);
     let gameId: number;
@@ -253,16 +301,32 @@ export class GameDownloader {
     const credentials = this.getCredentials(title, gameId);
     let gameUploads;
     try {
-      const uploadsReq = await this.client.get(`/games/${gameId}/uploads`, true, false, { data: credentials, timeout: 15000 });
+      const uploadsReq = await this.client.get(`/games/${gameId}/uploads`, true, false, {
+        data: credentials,
+        timeout: 15000,
+      });
       gameUploads = uploadsReq.data.uploads;
     } catch (e: any) {
-      return { url, success: false, errors: [`Could not fetch game uploads for ${title}: ${e}`], external_urls: [] };
+      return {
+        url,
+        success: false,
+        errors: [`Could not fetch game uploads for ${title}: ${e}`],
+        external_urls: [],
+      };
     }
     const externalUrls: string[] = [];
     const errors: string[] = [];
     fs.mkdirSync(paths['files'], { recursive: true });
     for (const upload of gameUploads) {
-      if (!('id' in upload && 'filename' in upload && 'type' in upload && 'traits' in upload && 'storage' in upload)) {
+      if (
+        !(
+          'id' in upload &&
+          'filename' in upload &&
+          'type' in upload &&
+          'traits' in upload &&
+          'storage' in upload
+        )
+      ) {
         errors.push(`Upload metadata incomplete: ${JSON.stringify(upload)}`);
         continue;
       }
@@ -276,12 +340,20 @@ export class GameDownloader {
         console.info(`File '${fileName}' has ignored type '${fileType}', skipping`);
         continue;
       }
-      if (this.settings.filterFilesPlatform && fileType === 'default' && !fileTraits.some(t => this.settings.filterFilesPlatform!.includes(t))) {
+      if (
+        this.settings.filterFilesPlatform &&
+        fileType === 'default' &&
+        !fileTraits.some(t => this.settings.filterFilesPlatform!.includes(t))
+      ) {
         console.info(`File '${fileName}' not for requested platforms, skipping`);
         continue;
       }
-      if (shouldSkipItemByGlob('File', fileName, this.settings.filterFilesGlob)) continue;
-      if (shouldSkipItemByRegex('File', fileName, this.settings.filterFilesRegex)) continue;
+      if (shouldSkipItemByGlob('File', fileName, this.settings.filterFilesGlob)) {
+        continue;
+      }
+      if (shouldSkipItemByRegex('File', fileName, this.settings.filterFilesRegex)) {
+        continue;
+      }
       const targetPath = uploadIsExternal ? null : path.join(paths['files'], fileName);
       try {
         const targetUrl = await this.downloadFileByUploadId(uploadId, targetPath, credentials);
@@ -295,7 +367,9 @@ export class GameDownloader {
         if (expectedSize !== undefined && downloadedSize !== expectedSize) {
           contentSize = await GameDownloader.getDecompressedContentSize(targetPath!);
           if (contentSize !== expectedSize) {
-            errors.push(`Downloaded file size is ${downloadedSize} (content ${contentSize}), expected ${expectedSize} for upload ${JSON.stringify(upload)}`);
+            errors.push(
+              `Downloaded file size is ${downloadedSize} (content ${contentSize}), expected ${expectedSize} for upload ${JSON.stringify(upload)}`
+            );
           }
         }
       } catch (e: any) {
@@ -305,7 +379,9 @@ export class GameDownloader {
     if (this.settings.mirrorWeb) {
       fs.mkdirSync(paths['screenshots'], { recursive: true });
       for (const screenshot of metadata.screenshots) {
-        if (!screenshot) continue;
+        if (!screenshot) {
+          continue;
+        }
         const fileName = path.basename(screenshot);
         try {
           await this.downloadFile(screenshot, path.join(paths['screenshots'], fileName), {});
@@ -328,7 +404,11 @@ export class GameDownloader {
   }
 }
 
-export async function driveDownloads(jobs: string[], settings: Settings, keys: Record<number, string>): Promise<void> {
+export async function driveDownloads(
+  jobs: string[],
+  settings: Settings,
+  keys: Record<number, string>
+): Promise<void> {
   const downloader = new GameDownloader(settings, keys);
   const results: DownloadResult[] = new Array(jobs.length);
 
@@ -342,7 +422,9 @@ export async function driveDownloads(jobs: string[], settings: Settings, keys: R
   const worker = async () => {
     while (true) {
       let current: number;
-      if (index >= jobs.length) return;
+      if (index >= jobs.length) {
+        return;
+      }
       current = index++;
       const job = jobs[current];
       const res = await downloader.download(job);
@@ -360,9 +442,19 @@ export async function driveDownloads(jobs: string[], settings: Settings, keys: R
 
   console.log('Download complete!');
   for (const r of results) {
-    if (!r.errors.length && !r.external_urls.length) continue;
-    if (r.success) console.log(`\nNotes for ${r.url}:`); else console.log(`\nDownload failed for ${r.url}:`);
-    for (const e of r.errors) console.log(`- ${e}`);
-    for (const u of r.external_urls) console.log(`- External download URL (download manually!): ${u}`);
+    if (!r.errors.length && !r.external_urls.length) {
+      continue;
+    }
+    if (r.success) {
+      console.log(`\nNotes for ${r.url}:`);
+    } else {
+      console.log(`\nDownload failed for ${r.url}:`);
+    }
+    for (const e of r.errors) {
+      console.log(`- ${e}`);
+    }
+    for (const u of r.external_urls) {
+      console.log(`- External download URL (download manually!): ${u}`);
+    }
   }
 }

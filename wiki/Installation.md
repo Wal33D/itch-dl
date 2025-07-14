@@ -4,7 +4,7 @@
 
 **Get itch-dl up and running on your system**
 
-*Complete setup instructions with troubleshooting*
+_Complete setup instructions with troubleshooting_
 
 ---
 
@@ -13,11 +13,13 @@
 ## 🚀 Quick Install (Recommended)
 
 ### ⚡ One-Line Install
+
 ```bash
 npm install -g itch-dl
 ```
 
 ### ✅ Verify Installation
+
 ```bash
 itch-dl --version
 # Should output: itch-dl version x.x.x
@@ -36,6 +38,7 @@ Before installing itch-dl, ensure you have:
 <td width="30%">
 
 ### 📦 Required
+
 - **Node.js 18+**
 - **npm** (included with Node.js)
 - **itch.io account**
@@ -44,15 +47,18 @@ Before installing itch-dl, ensure you have:
 <td width="70%">
 
 ### 🔗 Download Links
+
 - [Node.js Download](https://nodejs.org/) - Choose LTS version
 - [itch.io Sign Up](https://itch.io/register) - Free account
-- [itch.io API Keys](https://itch.io/user/settings/api-keys) - Generate after signup
+- [itch.io API Keys](https://itch.io/user/settings/api-keys) - Generate after
+  signup
 
 </td>
 </tr>
 </table>
 
 ### 🔍 Check Your System
+
 ```bash
 # Check Node.js version (should be 18+)
 node --version
@@ -156,11 +162,12 @@ npm run prepare     # Pre-publish preparation
 After installation, you need an itch.io API key:
 
 ### 🎯 Quick Steps
+
 1. **Log in** to [itch.io](https://itch.io)
 2. **Visit** [API Keys page](https://itch.io/user/settings/api-keys)
 3. **Click** "Generate new API key"
 4. **Name** your key (e.g., "itch-dl downloads")
-5. **Copy** the generated key ⚠️ *You won't see it again!*
+5. **Copy** the generated key ⚠️ _You won't see it again!_
 
 ### 💾 Save Your Key
 
@@ -189,6 +196,7 @@ itch-dl URL --api-key your-api-key-here
 **Problem**: Node.js/npm not installed or not in PATH
 
 **Solutions**:
+
 ```bash
 # Install Node.js from official website
 # https://nodejs.org/
@@ -202,6 +210,7 @@ sudo apt update && sudo apt install nodejs npm
 # Verify installation
 node --version && npm --version
 ```
+
 </details>
 
 <details>
@@ -210,6 +219,7 @@ node --version && npm --version
 **Problem**: npm permissions not configured properly
 
 **Solutions**:
+
 ```bash
 # Option 1: Use npx instead (no global install)
 npx itch-dl --help
@@ -223,6 +233,7 @@ source ~/.bashrc
 # Option 3: Use sudo (not recommended)
 sudo npm install -g itch-dl
 ```
+
 </details>
 
 <details>
@@ -231,6 +242,7 @@ sudo npm install -g itch-dl
 **Problem**: Binary not in PATH or installation incomplete
 
 **Solutions**:
+
 ```bash
 # Check if installed
 npm list -g itch-dl
@@ -245,6 +257,7 @@ source ~/.bashrc
 # Alternative: Use full path
 $(npm bin -g)/itch-dl --help
 ```
+
 </details>
 
 <details>
@@ -253,6 +266,7 @@ $(npm bin -g)/itch-dl --help
 **Problem**: itch-dl requires Node.js 18+
 
 **Solutions**:
+
 ```bash
 # Check current version
 node --version
@@ -267,6 +281,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 nvm install node
 nvm use node
 ```
+
 </details>
 
 <details>
@@ -275,6 +290,7 @@ nvm use node
 **Problem**: Network or firewall blocking npm/itch.io
 
 **Solutions**:
+
 ```bash
 # Check connectivity
 curl -I https://registry.npmjs.org
@@ -290,6 +306,7 @@ npm config set https-proxy http://proxy.company.com:8080
 # Disable strict SSL (last resort)
 npm config set strict-ssl false
 ```
+
 </details>
 
 ### 🔍 Diagnostic Commands
@@ -316,17 +333,20 @@ curl -I https://api.itch.io
 ## 🌍 Platform-Specific Notes
 
 ### 🍎 macOS
+
 - Use **Homebrew** for Node.js: `brew install node`
 - **Xcode Command Line Tools** may be required
 - **Apple Silicon (M1/M2)**: Fully supported
 
 ### 🐧 Linux
+
 - **Ubuntu/Debian**: `sudo apt install nodejs npm`
 - **CentOS/RHEL**: `sudo yum install nodejs npm`
 - **Arch**: `sudo pacman -S nodejs npm`
 - **AppImage/Snap**: Also available via npm
 
 ### 🪟 Windows
+
 - Download from [nodejs.org](https://nodejs.org/)
 - **WSL2**: Recommended for development
 - **PowerShell**: Preferred over Command Prompt
@@ -337,6 +357,7 @@ curl -I https://api.itch.io
 ## ⚡ Performance Tips
 
 ### 🚀 Optimize for Speed
+
 ```bash
 # Use npm cache
 npm config set cache ~/.npm-cache
@@ -350,6 +371,7 @@ itch-dl URL --parallel 3  # Adjust based on your connection
 ```
 
 ### 💾 Storage Considerations
+
 - **Disk space**: Game downloads can be large (GB per game)
 - **SSD recommended**: For better I/O performance during extraction
 - **Backup location**: Consider external drives for archives
@@ -366,6 +388,7 @@ itch-dl URL --parallel 3  # Adjust based on your connection
 4. 🚀 **Start downloading!** - Try a small jam first
 
 ### 🎮 Test Your Setup
+
 ```bash
 # Quick test (requires API key)
 itch-dl https://itch.io/jam/mini-jam-150 --urls-only --api-key YOUR_KEY
@@ -378,8 +401,9 @@ itch-dl https://itch.io/jam/mini-jam-150 --api-key YOUR_KEY
 
 <div align="center">
 
-**🎉 Ready to download!** 
+**🎉 Ready to download!**
 
-Need help? Check our [Usage Guide](Usage.md) or [report an issue](https://github.com/Wal33D/itch-dl/issues).
+Need help? Check our [Usage Guide](Usage.md) or
+[report an issue](https://github.com/Wal33D/itch-dl/issues).
 
 </div>

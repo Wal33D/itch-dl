@@ -4,7 +4,8 @@
 
 **Secure authentication for itch-dl downloads**
 
-*Everything you need to know about getting, using, and managing your itch.io API key*
+_Everything you need to know about getting, using, and managing your itch.io API
+key_
 
 ---
 
@@ -13,11 +14,13 @@
 ## 🚀 Quick Start
 
 ### ⚡ Get Your API Key in 3 Steps
+
 1. **Log in** to [itch.io](https://itch.io)
 2. **Visit** [API Keys page](https://itch.io/user/settings/api-keys)
 3. **Generate** a new key and copy it immediately
 
 ### 🎯 Use Your API Key
+
 ```bash
 # Method 1: Command line (quick testing)
 itch-dl https://itch.io/jam/gmtk-2023 --api-key YOUR_API_KEY
@@ -36,7 +39,9 @@ itch-dl https://itch.io/jam/gmtk-2023
 ## 🤔 What is an API Key?
 
 ### 🔐 Authentication Token
-An API key is a **unique identifier** that allows itch-dl to access your itch.io account securely:
+
+An API key is a **unique identifier** that allows itch-dl to access your itch.io
+account securely:
 
 - 🔑 **Authenticates** your requests to itch.io
 - 📚 **Provides access** to your game library and purchases
@@ -50,8 +55,9 @@ An API key is a **unique identifier** that allows itch-dl to access your itch.io
 <td width="50%">
 
 #### 🎯 Full Access
+
 - ✅ Your purchased games
-- ✅ Your claimed free games  
+- ✅ Your claimed free games
 - ✅ Games from bundles you own
 - ✅ Your collections
 - ✅ Games you have download keys for
@@ -62,6 +68,7 @@ An API key is a **unique identifier** that allows itch-dl to access your itch.io
 <td width="50%">
 
 #### ❌ No Access
+
 - ❌ Paid games you don't own
 - ❌ Private games without permission
 - ❌ Other users' private collections
@@ -79,18 +86,23 @@ An API key is a **unique identifier** that allows itch-dl to access your itch.io
 ### 📋 Step-by-Step Guide
 
 #### 1️⃣ Sign In to itch.io
+
 Visit [itch.io](https://itch.io) and log in with your account.
 
 #### 2️⃣ Navigate to API Settings
+
 Go to **[API Keys page](https://itch.io/user/settings/api-keys)** or:
+
 - Click your profile → **Settings** → **API Keys**
 
 #### 3️⃣ Generate New Key
+
 - Click **"Generate new API key"**
 - Give it a descriptive name (e.g., "itch-dl downloads")
 - Click **Generate**
 
 #### 4️⃣ Copy Your Key
+
 ⚠️ **IMPORTANT**: Copy the key **immediately** - you won't see it again!
 
 ```
@@ -180,6 +192,7 @@ echo 'export ITCH_API_KEY="your-key"' >> ~/.bashrc    # Bash
 echo 'export ITCH_API_KEY="your-key"' >> ~/.zshrc     # Zsh
 source ~/.bashrc  # Reload configuration
 ```
+
 </details>
 
 <details>
@@ -196,6 +209,7 @@ $env:ITCH_API_KEY = "your-key"
 # Variable name: ITCH_API_KEY
 # Variable value: your-key
 ```
+
 </details>
 
 ### 3️⃣ Configuration File Method
@@ -213,6 +227,7 @@ echo '{"apiKey": "your-key-here"}' > ~/.config/itch-dl/config.json
 ```
 
 **Full config example:**
+
 ```json
 {
   "apiKey": "abc123def456ghi789jkl012mno345pqr678stu",
@@ -231,6 +246,7 @@ See [Configuration Guide](Configuration.md) for complete setup.
 ### 🛡️ Security Best Practices
 
 #### ✅ DO
+
 - ✅ **Keep keys private** - Never share or expose them
 - ✅ **Use descriptive names** - Track what each key is for
 - ✅ **Rotate keys periodically** - Generate new ones occasionally
@@ -239,6 +255,7 @@ See [Configuration Guide](Configuration.md) for complete setup.
 - ✅ **Delete unused keys** - Clean up old/compromised keys
 
 #### ❌ DON'T
+
 - ❌ **Commit to version control** - Never add to git repositories
 - ❌ **Share in public forums** - Don't post in Discord, Reddit, etc.
 - ❌ **Email or message** - Keys can be intercepted
@@ -283,7 +300,7 @@ You can create multiple API keys for organization:
 # Development key
 ITCH_API_KEY_DEV="dev-key-here"
 
-# Production key  
+# Production key
 ITCH_API_KEY_PROD="prod-key-here"
 
 # Archive key
@@ -321,6 +338,7 @@ ITCH_API_KEY=abc123def456ghi789jkl012mno345pqr678stu
 **Problem**: itch-dl can't find your API key
 
 **Solutions:**
+
 ```bash
 # Check if environment variable is set
 echo $ITCH_API_KEY
@@ -334,6 +352,7 @@ itch-dl URL --api-key YOUR_KEY
 # Debug configuration loading
 itch-dl --verbose --help
 ```
+
 </details>
 
 <details>
@@ -342,16 +361,19 @@ itch-dl --verbose --help
 **Problem**: itch.io rejects your API key
 
 **Causes & Solutions:**
+
 - **Typo in key**: Double-check you copied the entire key
 - **Key deleted**: Check [API Keys page](https://itch.io/user/settings/api-keys)
 - **Key expired**: Some keys may expire (rare)
 - **Account issues**: Verify you can log into itch.io normally
 
 **Test your key manually:**
+
 ```bash
 curl "https://api.itch.io/profile?api_key=YOUR_KEY"
 # Should return your profile JSON, not an error
 ```
+
 </details>
 
 <details>
@@ -360,6 +382,7 @@ curl "https://api.itch.io/profile?api_key=YOUR_KEY"
 **Problem**: Network or permission issues
 
 **Solutions:**
+
 - **Check internet connection**: Verify you can access itch.io
 - **Try different URL**: Test with a public game first
 - **Check API key permissions**: Ensure key has necessary access
@@ -372,6 +395,7 @@ curl "https://api.itch.io/profile?api_key=YOUR_KEY"
 **Problem**: Too many requests to itch.io
 
 **Solutions:**
+
 ```bash
 # Reduce parallel downloads
 itch-dl URL --parallel 1 --api-key YOUR_KEY
@@ -381,6 +405,7 @@ itch-dl URL --parallel 1 --api-key YOUR_KEY
 
 # Check if you're running multiple itch-dl instances
 ```
+
 </details>
 
 ### 🔍 Debug Your API Key
@@ -415,6 +440,7 @@ docker run -e ITCH_API_KEY="your-key" your-image
 ### 🔄 CI/CD Pipelines
 
 **GitHub Actions:**
+
 ```yaml
 env:
   ITCH_API_KEY: ${{ secrets.ITCH_API_KEY }}
@@ -425,6 +451,7 @@ steps:
 ```
 
 **GitLab CI:**
+
 ```yaml
 variables:
   ITCH_API_KEY: $ITCH_API_KEY
@@ -509,12 +536,12 @@ ITCH_API_KEY="archive-key" itch-dl URL --profile archive
 
 ### 🎯 Quick Reference
 
-| Situation | Recommended Method | Security Level |
-|-----------|-------------------|----------------|
-| **Testing** | Command line | ⚠️ Low |
-| **Regular use** | Config file | 🔒 Medium |
-| **Automation** | Environment variables | 🔐 High |
-| **CI/CD** | Secret management | 🛡️ Highest |
+| Situation       | Recommended Method    | Security Level |
+| --------------- | --------------------- | -------------- |
+| **Testing**     | Command line          | ⚠️ Low         |
+| **Regular use** | Config file           | 🔒 Medium      |
+| **Automation**  | Environment variables | 🔐 High        |
+| **CI/CD**       | Secret management     | 🛡️ Highest     |
 
 ### 🔒 Security Checklist
 
@@ -540,7 +567,8 @@ Use it responsibly, keep it secure, and respect itch.io's terms of service.
 
 ---
 
-**Need help?** Check [Configuration](Configuration.md) for advanced setups or [Usage](Usage.md) for download examples.
+**Need help?** Check [Configuration](Configuration.md) for advanced setups or
+[Usage](Usage.md) for download examples.
 
 🔑 **Happy downloading!**
 

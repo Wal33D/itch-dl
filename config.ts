@@ -106,19 +106,19 @@ export function createAndGetConfigPath(): string {
 }
 
 const TYPE_CHECKS: Record<keyof Settings, (v: any) => boolean> = {
-  apiKey: (v) => typeof v === 'string',
-  userAgent: (v) => typeof v === 'string',
-  downloadTo: (v) => typeof v === 'string',
-  mirrorWeb: (v) => typeof v === 'boolean',
-  urlsOnly: (v) => typeof v === 'boolean',
-  parallel: (v) => typeof v === 'number',
-  filterFilesPlatform: (v) => Array.isArray(v),
-  filterFilesType: (v) => Array.isArray(v),
-  filterFilesGlob: (v) => typeof v === 'string',
-  filterFilesRegex: (v) => typeof v === 'string',
-  filterUrlsGlob: (v) => typeof v === 'string',
-  filterUrlsRegex: (v) => typeof v === 'string',
-  verbose: (v) => typeof v === 'boolean',
+  apiKey: v => typeof v === 'string',
+  userAgent: v => typeof v === 'string',
+  downloadTo: v => typeof v === 'string',
+  mirrorWeb: v => typeof v === 'boolean',
+  urlsOnly: v => typeof v === 'boolean',
+  parallel: v => typeof v === 'number',
+  filterFilesPlatform: v => Array.isArray(v),
+  filterFilesType: v => Array.isArray(v),
+  filterFilesGlob: v => typeof v === 'string',
+  filterFilesRegex: v => typeof v === 'string',
+  filterUrlsGlob: v => typeof v === 'string',
+  filterUrlsRegex: v => typeof v === 'string',
+  verbose: v => typeof v === 'boolean',
 };
 
 const EXPECTED_TYPES: Record<keyof Settings, string> = {
