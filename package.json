@@ -23,11 +23,25 @@
     "itch.io",
     "downloader",
     "games",
-    "bulk-download"
+    "bulk-download",
+    "gaming",
+    "typescript",
+    "cli",
+    "backup",
+    "archive"
   ],
   "author": "Wal33D",
   "license": "MIT",
   "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "build/",
+    "README.md",
+    "LICENSE",
+    "cli-progress.d.ts"
+  ],
   "dependencies": {
     "axios": "^1.10.0",
     "axios-retry": "^3.7.0",
