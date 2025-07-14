@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Build outputs
+build/
+dist/
+*.tsbuildinfo
+
+# Coverage and test reports
+coverage/
+.nyc_output/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Package files
+*.tgz
+*.tar.gz
+
+# Logs
+logs/
+*.log
+
+# Lock files (should not be formatted)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Generated documentation
+docs/api/
