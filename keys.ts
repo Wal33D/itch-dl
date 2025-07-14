@@ -8,7 +8,7 @@ export async function loadKeysAndUrls(client: ItchApiClient): Promise<void> {
   KEYS_CACHED = false;
   let page = 1;
   while (true) {
-    const res = await client.get('/profile/owned-keys', true, false, {
+    const res = await client.get('/profile/owned-keys', true, {
       params: { page },
       timeout: 15000,
     });

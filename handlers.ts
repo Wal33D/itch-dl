@@ -74,7 +74,7 @@ export async function getJobsForCollectionJson(
   let page = 1;
   const found = new Set<string>();
   while (true) {
-    const r = await client.get(url, true, false, { params: { page }, timeout: 15000 });
+    const r = await client.get(url, true, { params: { page }, timeout: 15000 });
     if (r.status !== 200) {
       break;
     }

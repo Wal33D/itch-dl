@@ -1,9 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { load, type CheerioAPI, type Cheerio } from 'cheerio';
+import { load, type CheerioAPI } from 'cheerio';
 import AdmZip from 'adm-zip';
 import * as tar from 'tar';
-import axios from 'axios';
 import { SingleBar, Presets } from 'cli-progress';
 import { ItchApiClient } from './api';
 import {
@@ -228,7 +227,7 @@ export class GameDownloader {
     credentials: Record<string, any>
   ): Promise<string> {
     try {
-      const res = await this.client.get(url, true, false, {
+      const res = await this.client.get(url, true, {
         responseType: 'stream',
         data: credentials,
       });
@@ -301,7 +300,7 @@ export class GameDownloader {
     const credentials = this.getCredentials(title, gameId);
     let gameUploads;
     try {
-      const uploadsReq = await this.client.get(`/games/${gameId}/uploads`, true, false, {
+      const uploadsReq = await this.client.get(`/games/${gameId}/uploads`, true, {
         data: credentials,
         timeout: 15000,
       });
@@ -421,11 +420,10 @@ export async function driveDownloads(
 
   const worker = async () => {
     while (true) {
-      let current: number;
       if (index >= jobs.length) {
         return;
       }
-      current = index++;
+      const current = index++;
       const job = jobs[current];
       const res = await downloader.download(job);
       results[current] = res;
