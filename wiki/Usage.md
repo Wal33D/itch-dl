@@ -1,210 +1,330 @@
-# Usage
+<div align="center">
 
-This page covers how to use itch-dl with various command-line options and examples.
+# 📖 Usage Guide
 
-## Basic Usage
+**Master itch-dl with comprehensive examples and command reference**
 
+*From basic downloads to advanced filtering and automation*
+
+---
+
+</div>
+
+## 🚀 Quick Reference
+
+### ⚡ Essential Commands
 ```bash
-itch-dl <url_or_path> [options]
+# Basic download
+itch-dl <URL> --api-key YOUR_KEY
+
+# List URLs only (no download)
+itch-dl <URL> --urls-only --api-key YOUR_KEY
+
+# Download with filters
+itch-dl <URL> --filter-files-platform windows --api-key YOUR_KEY
+
+# Fast parallel downloads  
+itch-dl <URL> --parallel 3 --api-key YOUR_KEY
 ```
 
-Where `<url_or_path>` can be:
-- An itch.io URL (game, jam, collection, etc.)
-- Path to a game jam entries JSON file
-- Path to a text file with URLs (one per line)
+### 📋 Input Formats
+- 🔗 **itch.io URLs** - Games, jams, collections, profiles
+- 📄 **JSON files** - Game jam entries, exported data
+- 📝 **Text files** - Lists of URLs (one per line)
 
-## Required Setup
+---
 
-You need an itch.io API key to use itch-dl. Get one from [itch.io API keys page](https://itch.io/user/settings/api-keys).
+## 🎯 Basic Examples
 
-Provide your API key using one of these methods:
-1. Command line: `--api-key YOUR_KEY`
-2. Environment variable: `export ITCH_API_KEY=YOUR_KEY`
-3. Configuration file (see [Configuration](Configuration.md))
-
-## Basic Examples
-
-### Download a Game Jam
+### 🏆 Game Jams
 ```bash
-itch-dl https://itch.io/jam/brackeys-12 --api-key YOUR_API_KEY
+# Download all submissions from a game jam
+itch-dl https://itch.io/jam/brackeys-12 --api-key YOUR_KEY
+
+# Popular game jams
+itch-dl https://itch.io/jam/gmtk-2023 --api-key YOUR_KEY
+itch-dl https://itch.io/jam/ludum-dare-54 --api-key YOUR_KEY
+itch-dl https://itch.io/jam/mini-jam-150 --api-key YOUR_KEY
 ```
 
-### Download Your Library
+### 📚 Your Library
 ```bash
-itch-dl https://itch.io/my-purchases --api-key YOUR_API_KEY
+# Download everything you own
+itch-dl https://itch.io/my-purchases --api-key YOUR_KEY
+
+# Combined with filters for organization
+itch-dl https://itch.io/my-purchases \
+  --filter-files-platform windows \
+  --download-to "/games/windows" \
+  --api-key YOUR_KEY
 ```
 
-### Download a Collection
+### 📂 Collections
 ```bash
-itch-dl https://itch.io/c/4187503/test-collection --api-key YOUR_API_KEY
+# Public collection
+itch-dl https://itch.io/c/4187503/cool-indie-games --api-key YOUR_KEY
+
+# Your personal collection
+itch-dl https://itch.io/c/123456/favorites --api-key YOUR_KEY
 ```
 
-### Download All Games from a Creator
+### 👨‍💻 Creator Pages
 ```bash
-itch-dl https://kiseff.itch.io/ --api-key YOUR_API_KEY
-# or
-itch-dl https://itch.io/profile/pancelor --api-key YOUR_API_KEY
+# All games from a specific creator
+itch-dl https://dani-games.itch.io/ --api-key YOUR_KEY
+itch-dl https://maddy.itch.io/ --api-key YOUR_KEY
+
+# Profile page format
+itch-dl https://itch.io/profile/pancelor --api-key YOUR_KEY
 ```
 
-### Download Individual Games
+### 🔥 Browse Pages
 ```bash
-itch-dl https://maddymakesgamesinc.itch.io/celeste --api-key YOUR_API_KEY
+# Popular games
+itch-dl https://itch.io/games/popular --api-key YOUR_KEY
+
+# Newest releases
+itch-dl https://itch.io/games/newest --api-key YOUR_KEY
+
+# Games by tag
+itch-dl https://itch.io/games/tag-puzzle --api-key YOUR_KEY
+itch-dl https://itch.io/games/tag-platformer --api-key YOUR_KEY
 ```
 
-## Command-Line Options
-
-### Authentication
-- `--api-key <key>` - Your itch.io API key
-- `--user-agent <agent>` - Custom user agent for HTTP requests
-
-### Download Control
-- `--download-to <path>` - Directory to save downloads (default: current directory)
-- `--parallel <number>` - Number of parallel downloads (default: 1)
-- `--urls-only` - Print URLs without downloading
-
-### Content Options
-- `--mirror-web` - Download web assets (images, CSS, etc.) from game pages
-
-### File Filtering
-
-#### Platform Filtering
+### 🎮 Individual Games
 ```bash
---filter-files-platform <platforms...>
+# Single game download
+itch-dl https://maddymakesgamesinc.itch.io/celeste --api-key YOUR_KEY
+itch-dl https://finji.itch.io/night-in-the-woods --api-key YOUR_KEY
 ```
 
-Supported platforms:
-- `windows` (or `win`)
-- `linux` (or `lin`) 
-- `mac` (or `osx`, `darwin`)
-- `android` (or `and`)
-- `native` - Downloads for your current platform
+---
 
-Examples:
+## 🎯 File Filtering
+
+### 🖥️ Platform Filtering
+
+Filter downloads by target platform:
+
 ```bash
-# Windows games only
-itch-dl https://itch.io/jam/gmtk-2023 --filter-files-platform windows
+# Single platform
+itch-dl URL --filter-files-platform windows --api-key YOUR_KEY
+itch-dl URL --filter-files-platform linux --api-key YOUR_KEY
+itch-dl URL --filter-files-platform mac --api-key YOUR_KEY
+itch-dl URL --filter-files-platform android --api-key YOUR_KEY
 
 # Multiple platforms
-itch-dl https://itch.io/jam/gmtk-2023 --filter-files-platform windows linux mac
+itch-dl URL --filter-files-platform windows linux mac --api-key YOUR_KEY
 
-# Native platform
-itch-dl https://itch.io/jam/gmtk-2023 --filter-files-platform native
+# Native platform (auto-detects your OS)
+itch-dl URL --filter-files-platform native --api-key YOUR_KEY
 ```
 
-#### File Type Filtering
+**Platform aliases supported:**
+- `windows`, `win` → Windows
+- `linux`, `lin` → Linux  
+- `mac`, `osx`, `darwin` → macOS
+- `android`, `and` → Android
+- `native` → Your current platform
+
+### 📁 File Type Filtering
+
+Filter by itch.io file categories:
+
 ```bash
---filter-files-type <types...>
+# Game executables only
+itch-dl URL --filter-files-type default --api-key YOUR_KEY
+
+# Soundtracks only
+itch-dl URL --filter-files-type soundtrack --api-key YOUR_KEY
+
+# Documentation/books
+itch-dl URL --filter-files-type book --api-key YOUR_KEY
+
+# Video content
+itch-dl URL --filter-files-type video --api-key YOUR_KEY
+
+# Game modifications
+itch-dl URL --filter-files-type mod --api-key YOUR_KEY
+
+# Multiple types
+itch-dl URL --filter-files-type default soundtrack --api-key YOUR_KEY
 ```
 
-Common file types:
-- `default` - Executable/game files
-- `soundtrack` - Music files
-- `book` - Documentation/books
-- `video` - Video files
-- `mod` - Game modifications
-- `p_windows`, `p_linux`, `p_osx`, `p_android` - Platform-specific files
+### 🔍 Pattern Filtering
 
-#### Pattern Filtering
+#### Glob Patterns (Shell-style wildcards)
 ```bash
-# Glob pattern (shell-style wildcards)
---filter-files-glob "*.zip"
+# Only ZIP files
+itch-dl URL --filter-files-glob "*.zip" --api-key YOUR_KEY
 
-# Regular expression
---filter-files-regex "\.exe$"
+# Only executable files
+itch-dl URL --filter-files-glob "*.exe" --api-key YOUR_KEY
+
+# Multiple patterns (ZIP or RAR)
+itch-dl URL --filter-files-glob "*.{zip,rar}" --api-key YOUR_KEY
+
+# Exclude certain files
+itch-dl URL --filter-files-glob "!*.txt" --api-key YOUR_KEY
 ```
 
-### URL Filtering
+#### Regular Expressions
 ```bash
-# Filter URLs with glob pattern
---filter-urls-glob "*gmtk*"
+# Files ending in .exe or .zip
+itch-dl URL --filter-files-regex "\.(exe|zip)$" --api-key YOUR_KEY
 
-# Filter URLs with regex
---filter-urls-regex "brackeys"
+# Files containing "windows" in name
+itch-dl URL --filter-files-regex "windows" --api-key YOUR_KEY
+
+# Version numbers (v1.0, v2.1, etc.)
+itch-dl URL --filter-files-regex "v\d+\.\d+" --api-key YOUR_KEY
 ```
 
-### Configuration
-- `--profile <profile>` - Use a specific configuration profile
-- `--verbose` - Enable verbose logging
+### 🔗 URL Filtering
 
-## Advanced Examples
+Filter which game URLs to process:
 
-### Download with Multiple Filters
 ```bash
-# Windows ZIP files only from a jam
-itch-dl https://itch.io/jam/gmtk-2023 \
-  --filter-files-platform windows \
-  --filter-files-glob "*.zip" \
-  --api-key YOUR_API_KEY
+# Only URLs containing "gmtk"
+itch-dl URL --filter-urls-glob "*gmtk*" --api-key YOUR_KEY
+
+# URLs matching regex pattern
+itch-dl URL --filter-urls-regex "brackeys|gmtk|ludum" --api-key YOUR_KEY
+
+# Exclude certain creators
+itch-dl URL --filter-urls-glob "!*badcreator*" --api-key YOUR_KEY
 ```
 
-### Parallel Downloads
+---
+
+## ⚡ Advanced Usage
+
+### 🚀 Performance Options
+
 ```bash
-# Download with 3 parallel threads
-itch-dl https://itch.io/jam/brackeys-12 \
-  --parallel 3 \
-  --api-key YOUR_API_KEY
+# Parallel downloads (faster, but don't overload itch.io)
+itch-dl URL --parallel 3 --api-key YOUR_KEY
+
+# Custom download directory
+itch-dl URL --download-to "/external/drive/games" --api-key YOUR_KEY
+
+# Verbose logging for debugging
+itch-dl URL --verbose --api-key YOUR_KEY
+
+# Custom user agent
+itch-dl URL --user-agent "MyBot/1.0" --api-key YOUR_KEY
 ```
 
-### Just List URLs
+### 🌐 Web Content
+
 ```bash
-# Get URLs without downloading
-itch-dl https://itch.io/jam/brackeys-12 \
-  --urls-only \
-  --api-key YOUR_API_KEY > urls.txt
+# Download game page assets (images, CSS, etc.)
+itch-dl URL --mirror-web --api-key YOUR_KEY
+
+# Useful for preserving complete game pages
+itch-dl https://maddy.itch.io/celeste --mirror-web --api-key YOUR_KEY
 ```
 
-### Download to Specific Directory
+### 📋 Dry Run & Planning
+
 ```bash
-itch-dl https://itch.io/jam/gmtk-2023 \
-  --download-to "/path/to/games" \
-  --api-key YOUR_API_KEY
+# List all URLs without downloading
+itch-dl URL --urls-only --api-key YOUR_KEY
+
+# Save URL list to file
+itch-dl URL --urls-only --api-key YOUR_KEY > game_urls.txt
+
+# Count how many games will be downloaded
+itch-dl URL --urls-only --api-key YOUR_KEY | wc -l
 ```
 
-### Mirror Web Content
+---
+
+## ⚙️ Configuration & Profiles
+
+### 📄 Using Config Files
+
+Instead of typing options every time, save them to config files:
+
 ```bash
-# Download games plus web assets
-itch-dl https://itch.io/jam/brackeys-12 \
-  --mirror-web \
-  --api-key YOUR_API_KEY
+# Use default config file
+itch-dl URL  # API key and options from config
+
+# Use specific profile
+itch-dl URL --profile windows-only
+itch-dl URL --profile soundtracks-only
 ```
 
-## Input File Formats
+See [Configuration Guide](Configuration.md) for setup details.
 
-### Game Jam JSON
-Download the entries JSON directly:
+### 🔐 API Key Management
+
 ```bash
-# If you have the jam ID (e.g., 123456)
-curl https://itch.io/jam/123456/entries.json > jam.json
-itch-dl jam.json --api-key YOUR_API_KEY
+# Environment variable (recommended for scripts)
+export ITCH_API_KEY="your-key-here"
+itch-dl URL
+
+# Command line (quick testing)
+itch-dl URL --api-key YOUR_KEY
+
+# Config file (best for regular use)
+# Set "apiKey": "your-key" in config.json
+itch-dl URL
 ```
 
-### URL List File
-Create a text file with URLs (one per line):
-```
-https://game1.itch.io/awesome-game
-https://creator.itch.io/another-game
-https://itch.io/jam/cool-jam
-```
+---
 
-Then use it:
+## 📁 File Input Methods
+
+### 📄 Game Jam JSON Files
+
+Download jam entries JSON directly:
+
 ```bash
-itch-dl urls.txt --api-key YOUR_API_KEY
+# Method 1: Let itch-dl fetch it
+itch-dl https://itch.io/jam/gmtk-2023 --api-key YOUR_KEY
+
+# Method 2: Download JSON manually
+curl "https://itch.io/jam/123456/entries.json" > jam.json
+itch-dl jam.json --api-key YOUR_KEY
 ```
 
-## Output Structure
+### 📝 URL List Files
 
-Downloaded games are organized as:
+Create text files with URLs (one per line):
+
+```txt
+# games.txt
+https://maddy.itch.io/celeste
+https://finji.itch.io/night-in-the-woods
+https://dani-games.itch.io/crab-game
+```
+
+```bash
+# Use the file
+itch-dl games.txt --api-key YOUR_KEY
+```
+
+---
+
+## 📊 Output & Organization
+
+### 📂 Download Structure
+
+Downloaded games are organized like this:
+
 ```
 download-directory/
 ├── creator1/
 │   └── game1/
-│       ├── metadata.json
-│       ├── site.html
-│       ├── cover.jpg
-│       ├── files/
+│       ├── metadata.json      # Game info & ratings
+│       ├── site.html          # Game page HTML  
+│       ├── cover.jpg          # Cover art
+│       ├── files/             # Downloadable files
 │       │   ├── game.zip
-│       │   └── soundtrack.mp3
-│       └── screenshots/
+│       │   ├── soundtrack.mp3
+│       │   └── manual.pdf
+│       └── screenshots/       # Game screenshots
 │           ├── screenshot1.png
 │           └── screenshot2.png
 └── creator2/
@@ -212,20 +332,222 @@ download-directory/
         └── ...
 ```
 
-## Error Handling
+### 📋 Download Reports
 
-itch-dl will:
-- Skip already downloaded games
-- Report failed downloads at the end
-- List external download URLs that need manual downloading
-- Continue with other games if one fails
+itch-dl provides detailed reports after completion:
 
-Check the output for any manual steps needed after bulk downloading.
+```bash
+# Successful downloads show summary
+Download complete!
+Found 42 URL(s) total.
+Will process 39 URL(s) after filtering and deduplication.
 
-## Tips
+# Failed downloads are listed with reasons
+Download failed for https://example.itch.io/game:
+- File size mismatch: expected 1024MB, got 512MB
+- External download URL (download manually!): https://drive.google.com/...
 
-1. **Start Small**: Test with `--urls-only` first for large jams
-2. **Use Parallel Downloads**: Speed up with `--parallel 2-4` (don't overload itch.io)
-3. **Filter Early**: Use filters to avoid downloading unwanted content
-4. **Save API Key**: Use configuration files to avoid typing your API key repeatedly
-5. **Check Logs**: Enable `--verbose` for debugging issues
+# External URLs require manual download
+Notes for https://creator.itch.io/game:
+- External download URL: https://dropbox.com/s/abc123/game.zip
+```
+
+---
+
+## 🔧 Troubleshooting
+
+### 🚨 Common Issues
+
+<details>
+<summary><strong>❌ "You did not provide an API key"</strong></summary>
+
+**Solutions:**
+```bash
+# Check if API key is set
+echo $ITCH_API_KEY
+
+# Set environment variable
+export ITCH_API_KEY="your-key"
+
+# Use command line option
+itch-dl URL --api-key YOUR_KEY
+
+# Check config file
+cat ~/.config/itch-dl/config.json  # Linux
+cat ~/Library/Application\ Support/itch-dl/config.json  # macOS
+```
+</details>
+
+<details>
+<summary><strong>❌ "API key appears to be invalid"</strong></summary>
+
+**Solutions:**
+```bash
+# Test API key manually
+curl "https://api.itch.io/profile?api_key=YOUR_KEY"
+
+# Generate new key at: https://itch.io/user/settings/api-keys
+# Make sure you copied the entire key
+```
+</details>
+
+<details>
+<summary><strong>❌ "No URLs to download"</strong></summary>
+
+**Causes & Solutions:**
+- **All filtered out**: Check your filter settings
+- **Already downloaded**: Use `--verbose` to see skipped files
+- **Invalid URL**: Verify the itch.io URL is correct
+- **Empty jam**: Some jams might have no submissions
+
+```bash
+# Debug with verbose output
+itch-dl URL --verbose --api-key YOUR_KEY
+
+# Try without filters first
+itch-dl URL --api-key YOUR_KEY
+
+# Check if URLs are found
+itch-dl URL --urls-only --api-key YOUR_KEY
+```
+</details>
+
+<details>
+<summary><strong>❌ "Download failed" for specific games</strong></summary>
+
+**Common reasons:**
+- **External files**: Hosted on Google Drive, Dropbox, etc.
+- **Size mismatch**: Download interrupted or corrupted
+- **Access restricted**: Need special permissions
+- **File moved**: Creator updated/removed files
+
+**Solutions:**
+- Check the error report for external URLs
+- Try downloading again (may be temporary)
+- Contact creator for external downloads
+</details>
+
+### 🔍 Debug Mode
+
+Get detailed information about what itch-dl is doing:
+
+```bash
+# Enable verbose logging
+itch-dl URL --verbose --api-key YOUR_KEY
+
+# This shows:
+# - Configuration loading
+# - URL processing steps  
+# - API requests
+# - File download progress
+# - Error details
+```
+
+---
+
+## 🎯 Real-World Examples
+
+### 🏆 Complete Game Jam Archive
+```bash
+# Download entire GMTK 2023 jam
+itch-dl https://itch.io/jam/gmtk-2023 \
+  --download-to "/archives/gmtk-2023" \
+  --parallel 2 \
+  --mirror-web \
+  --api-key YOUR_KEY
+```
+
+### 🖥️ Platform-Specific Collection
+```bash
+# Windows games only to specific drive
+itch-dl https://itch.io/my-purchases \
+  --filter-files-platform windows \
+  --download-to "D:/Games/itch-windows" \
+  --parallel 3 \
+  --api-key YOUR_KEY
+```
+
+### 🎵 Soundtrack Collection
+```bash
+# Only download music files
+itch-dl https://itch.io/my-purchases \
+  --filter-files-type soundtrack \
+  --download-to "/music/game-soundtracks" \
+  --api-key YOUR_KEY
+```
+
+### 📱 Mobile Games Archive
+```bash
+# Android games with APK files
+itch-dl https://itch.io/games/platform-android \
+  --filter-files-platform android \
+  --filter-files-glob "*.apk" \
+  --download-to "/mobile/android-games" \
+  --api-key YOUR_KEY
+```
+
+### 🔍 Filtered Creator Archive
+```bash
+# Specific creator, Windows executables only
+itch-dl https://dani-games.itch.io/ \
+  --filter-files-platform windows \
+  --filter-files-glob "*.{exe,zip}" \
+  --download-to "/games/dani" \
+  --api-key YOUR_KEY
+```
+
+---
+
+## 📚 Advanced Topics
+
+### 🔄 Automation & Scripting
+
+```bash
+#!/bin/bash
+# Automated backup script
+
+JAMS=(
+  "https://itch.io/jam/gmtk-2023"
+  "https://itch.io/jam/brackeys-12"
+  "https://itch.io/jam/ludum-dare-54"
+)
+
+for jam in "${JAMS[@]}"; do
+  echo "Downloading: $jam"
+  itch-dl "$jam" \
+    --download-to "/backup/$(basename $jam)" \
+    --parallel 2 \
+    --api-key "$ITCH_API_KEY"
+done
+```
+
+### 📊 Bulk Operations
+
+```bash
+# Generate download statistics
+itch-dl https://itch.io/jam/gmtk-2023 --urls-only --api-key YOUR_KEY | \
+  wc -l > game_count.txt
+
+# Create filtered URL lists
+itch-dl https://itch.io/jam/gmtk-2023 --urls-only --api-key YOUR_KEY | \
+  grep "windows" > windows_games.txt
+
+# Download from pre-filtered list
+itch-dl windows_games.txt --api-key YOUR_KEY
+```
+
+---
+
+<div align="center">
+
+## 🎮 Ready to Download!
+
+**Pro tip**: Start with a small jam (like `--urls-only`) to test your setup before downloading large collections.
+
+Need more help? Check [Configuration](Configuration.md) or [API Keys](API-Keys.md) guides.
+
+---
+
+**Happy archiving!** 📦
+
+</div>
