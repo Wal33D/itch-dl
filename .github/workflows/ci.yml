@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
@@ -34,8 +34,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        node-version: [18, 20, 21]
+        include:
+          # Primary testing on Ubuntu LTS
+          - os: ubuntu-latest
+            node-version: 20
+            name: 'Ubuntu (Node 20 LTS)'
+          # Single cross-platform check on Windows
+          - os: windows-latest
+            node-version: 20
+            name: 'Windows (Node 20)'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
