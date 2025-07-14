@@ -26,6 +26,8 @@ test('processPlatformTraits native', () => {
     expected = ['p_linux'];
   } else if (sys === 'darwin') {
     expected = ['p_osx'];
+  } else if (sys === 'win32') {
+    expected = ['p_windows'];
   } else {
     expected = [`p_${sys}`];
   }

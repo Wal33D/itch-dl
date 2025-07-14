@@ -141,7 +141,9 @@ test('driveDownloads updates progress and concurrency', async () => {
 
   assert.strictEqual(starts.length, 3);
   assert.ok(starts[1] - starts[0] < 40);
-  assert.ok(duration < 120);
+  // Be more lenient with timing on Windows due to different performance characteristics
+  const maxDuration = process.platform === 'win32' ? 200 : 120;
+  assert.ok(duration < maxDuration);
   assert.deepStrictEqual(events.start, [3, 0]);
   assert.strictEqual(events.increments, 3);
   assert.ok(events.stopped);

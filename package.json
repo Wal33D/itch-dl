@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node build/src/index.js",
-    "test": "npm run build && node --test build/tests/test-*.js",
+    "test": "npm run build && node --test build/tests/test-config.js build/tests/test-downloader.js build/tests/test-handlers.js build/tests/test-infobox.js build/tests/test-keys.js build/tests/test-utils.js",
     "itch-dl": "node build/src/index.js",
     "clean": "rm -rf build",
     "prepare": "npm run build",
