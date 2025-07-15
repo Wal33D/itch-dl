@@ -23,6 +23,12 @@
         "printWidth": 80,
         "proseWrap": "always"
       }
+    },
+    {
+      "files": "*.yml",
+      "options": {
+        "singleQuote": false
+      }
     }
   ]
 }
