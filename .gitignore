@@ -36,3 +36,6 @@ dist/
 ehthumbs.db
 Thumbs.db
 .claude
+
+# Coverage reports
+coverage/
