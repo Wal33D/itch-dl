@@ -6,7 +6,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/itch-dl)](https://www.npmjs.com/package/itch-dl)
 [![GitHub license](https://img.shields.io/github/license/Wal33D/itch-dl)](https://github.com/Wal33D/itch-dl/blob/main/LICENSE)
 [![Node.js Version](https://img.shields.io/node/v/itch-dl)](https://nodejs.org/)
-[![CI/CD](https://github.com/Wal33D/itch-dl/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Wal33D/itch-dl/actions/workflows/ci-cd.yml)
+[![CI/CD](https://github.com/Wal33D/itch-dl/actions/workflows/ci.yml/badge.svg)](https://github.com/Wal33D/itch-dl/actions/workflows/ci.yml)
 
 **Bulk download games from [itch.io](https://itch.io/) with ease**
 
