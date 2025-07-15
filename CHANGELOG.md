@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.4] - 2025-07-15
+
+### Fixed
+
+- Fixed TypeError when owned_keys API returns empty object instead of array
+  - Resolved issue preventing downloads when user has no owned games
+  - Added proper handling for both array and object responses from itch.io API
+
+## [0.6.3] - 2025-07-14
+
+### Changed
+
+- Downgraded commander to v12 to support Node.js 18+
+
 ## [0.6.2] - 2025-07-14
 
 ### Added
