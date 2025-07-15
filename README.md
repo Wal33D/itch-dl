@@ -243,6 +243,7 @@ for details!
 - Downloads games you **legitimately own** or have access to
 - Respects itch.io's terms of service and rate limits
 - Provides the same access as the official itch.io app
+- **Requires an API key for all operations** - even fetching public game information
 
 ### ❌ What This Tool Does NOT Do
 
