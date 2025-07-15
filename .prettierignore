@@ -41,3 +41,6 @@ pnpm-lock.yaml
 
 # Generated documentation
 docs/api/
+
+# Environment files
+.env*
