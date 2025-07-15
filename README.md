@@ -6,6 +6,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/itch-dl)](https://www.npmjs.com/package/itch-dl)
 [![GitHub license](https://img.shields.io/github/license/Wal33D/itch-dl)](https://github.com/Wal33D/itch-dl/blob/main/LICENSE)
 [![Node.js Version](https://img.shields.io/node/v/itch-dl)](https://nodejs.org/)
+[![CI/CD](https://github.com/Wal33D/itch-dl/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/Wal33D/itch-dl/actions/workflows/ci-cd.yml)
 
 **Bulk download games from [itch.io](https://itch.io/) with ease**
 
@@ -13,7 +14,9 @@ _TypeScript implementation for modern Node.js environments_
 
 [🚀 Quick Start](#-quick-start) •
 [📖 Documentation](https://github.com/Wal33D/itch-dl/wiki) •
-[💾 Installation](#-installation) • [🎯 Examples](#-usage-examples)
+[💾 Installation](#-installation) • 
+[🎯 Examples](#-usage-examples) •
+[🐛 Troubleshooting](#-troubleshooting)
 
 </div>
 
@@ -106,17 +109,23 @@ detailed instructions.
 ### Basic Downloads
 
 ```bash
+# Individual games (tested working examples)
+itch-dl https://baraklava.itch.io/manic-miners --api-key YOUR_KEY
+itch-dl https://ncase.itch.io/anxiety --api-key YOUR_KEY
+itch-dl https://bunmuen.itch.io/shiftatmidnight --api-key YOUR_KEY
+
 # Game jam with all submissions
-itch-dl https://itch.io/jam/brackeys-12 --api-key YOUR_KEY
+itch-dl https://itch.io/jam/gmtk-2023 --api-key YOUR_KEY
 
 # Your entire game library
 itch-dl https://itch.io/my-purchases --api-key YOUR_KEY
 
 # Specific creator's games
-itch-dl https://dani-games.itch.io/ --api-key YOUR_KEY
+itch-dl https://ncase.itch.io --api-key YOUR_KEY
+itch-dl https://bunmuen.itch.io --api-key YOUR_KEY
 
-# Public collection
-itch-dl https://itch.io/c/123456/cool-games --api-key YOUR_KEY
+# Public collection (real example)
+itch-dl https://itch.io/c/215689/public-collection --api-key YOUR_KEY
 ```
 
 ### Filtered Downloads
@@ -160,6 +169,39 @@ itch-dl --help
 
 ---
 
+## 🐛 Troubleshooting
+
+### Common Issues
+
+#### "You did not provide an API key"
+- Get your API key from [itch.io API Keys](https://itch.io/user/settings/api-keys)
+- Pass it with `--api-key YOUR_KEY` or set `ITCH_API_KEY` environment variable
+
+#### "TypeError: data.owned_keys is not iterable" *(Fixed in v0.6.4)*
+- This was resolved in version 0.6.4
+- Update to the latest version: `npm update -g itch-dl`
+
+#### Empty results for my-purchases
+- This is normal if you haven't purchased any games on itch.io
+- Free games need to be downloaded individually by URL
+
+#### Collection downloads fail
+- Ensure the collection is public
+- Private collections require you to be the owner or have access
+
+#### Network timeouts
+- Use `--parallel 1` to reduce concurrent requests
+- Check your internet connection and try again
+
+### Getting Help
+
+If you encounter issues:
+1. Check the [GitHub Issues](https://github.com/Wal33D/itch-dl/issues)
+2. Review the [wiki documentation](https://github.com/Wal33D/itch-dl/wiki)
+3. Create a new issue with details about your problem
+
+---
+
 ## 📚 Documentation
 
 | 📖 Guide                                                              | Description                                            |
@@ -168,6 +210,8 @@ itch-dl --help
 | [API Keys](https://github.com/Wal33D/itch-dl/wiki/API-Keys)           | How to get and securely use your itch.io API key       |
 | [Configuration](https://github.com/Wal33D/itch-dl/wiki/Configuration) | Config files, profiles, and environment variables      |
 | [Installation](https://github.com/Wal33D/itch-dl/wiki/Installation)   | Detailed installation instructions and troubleshooting |
+| [Tested Games](https://github.com/Wal33D/itch-dl/wiki/Tested-Games)   | List of games and URLs verified to work with itch-dl   |
+| [Troubleshooting](https://github.com/Wal33D/itch-dl/wiki/Troubleshooting) | Common issues and their solutions                   |
 
 ---
 
