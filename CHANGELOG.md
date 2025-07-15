@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.5] - 2025-07-15
+
+### Added
+
+- Comprehensive documentation updates with real tested examples
+- New wiki pages: Tested Games and Troubleshooting guides
+- CI/CD badge in README for build status visibility
+
+### Changed
+
+- Updated README with verified working game URLs from testing
+- Enhanced troubleshooting section with common issues and solutions
+- Improved examples using real games like Manic Miners, ncase games, etc.
+
+### Fixed
+
+- Prettier formatting issues in README preventing CI/CD from passing
+- Documentation links and navigation between README and wiki
+
 ## [0.6.4] - 2025-07-15
 
 ### Fixed
