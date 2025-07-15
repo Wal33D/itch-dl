@@ -14,8 +14,7 @@ _TypeScript implementation for modern Node.js environments_
 
 [🚀 Quick Start](#-quick-start) •
 [📖 Documentation](https://github.com/Wal33D/itch-dl/wiki) •
-[💾 Installation](#-installation) • 
-[🎯 Examples](#-usage-examples) •
+[💾 Installation](#-installation) • [🎯 Examples](#-usage-examples) •
 [🐛 Troubleshooting](#-troubleshooting)
 
 </div>
@@ -174,28 +173,35 @@ itch-dl --help
 ### Common Issues
 
 #### "You did not provide an API key"
-- Get your API key from [itch.io API Keys](https://itch.io/user/settings/api-keys)
+
+- Get your API key from
+  [itch.io API Keys](https://itch.io/user/settings/api-keys)
 - Pass it with `--api-key YOUR_KEY` or set `ITCH_API_KEY` environment variable
 
-#### "TypeError: data.owned_keys is not iterable" *(Fixed in v0.6.4)*
+#### "TypeError: data.owned_keys is not iterable" _(Fixed in v0.6.4)_
+
 - This was resolved in version 0.6.4
 - Update to the latest version: `npm update -g itch-dl`
 
 #### Empty results for my-purchases
+
 - This is normal if you haven't purchased any games on itch.io
 - Free games need to be downloaded individually by URL
 
 #### Collection downloads fail
+
 - Ensure the collection is public
 - Private collections require you to be the owner or have access
 
 #### Network timeouts
+
 - Use `--parallel 1` to reduce concurrent requests
 - Check your internet connection and try again
 
 ### Getting Help
 
 If you encounter issues:
+
 1. Check the [GitHub Issues](https://github.com/Wal33D/itch-dl/issues)
 2. Review the [wiki documentation](https://github.com/Wal33D/itch-dl/wiki)
 3. Create a new issue with details about your problem
@@ -204,14 +210,14 @@ If you encounter issues:
 
 ## 📚 Documentation
 
-| 📖 Guide                                                              | Description                                            |
-| --------------------------------------------------------------------- | ------------------------------------------------------ |
-| [Usage Guide](https://github.com/Wal33D/itch-dl/wiki/Usage)           | Complete command-line reference with examples          |
-| [API Keys](https://github.com/Wal33D/itch-dl/wiki/API-Keys)           | How to get and securely use your itch.io API key       |
-| [Configuration](https://github.com/Wal33D/itch-dl/wiki/Configuration) | Config files, profiles, and environment variables      |
-| [Installation](https://github.com/Wal33D/itch-dl/wiki/Installation)   | Detailed installation instructions and troubleshooting |
-| [Tested Games](https://github.com/Wal33D/itch-dl/wiki/Tested-Games)   | List of games and URLs verified to work with itch-dl   |
-| [Troubleshooting](https://github.com/Wal33D/itch-dl/wiki/Troubleshooting) | Common issues and their solutions                   |
+| 📖 Guide                                                                  | Description                                            |
+| ------------------------------------------------------------------------- | ------------------------------------------------------ |
+| [Usage Guide](https://github.com/Wal33D/itch-dl/wiki/Usage)               | Complete command-line reference with examples          |
+| [API Keys](https://github.com/Wal33D/itch-dl/wiki/API-Keys)               | How to get and securely use your itch.io API key       |
+| [Configuration](https://github.com/Wal33D/itch-dl/wiki/Configuration)     | Config files, profiles, and environment variables      |
+| [Installation](https://github.com/Wal33D/itch-dl/wiki/Installation)       | Detailed installation instructions and troubleshooting |
+| [Tested Games](https://github.com/Wal33D/itch-dl/wiki/Tested-Games)       | List of games and URLs verified to work with itch-dl   |
+| [Troubleshooting](https://github.com/Wal33D/itch-dl/wiki/Troubleshooting) | Common issues and their solutions                      |
 
 ---
 
