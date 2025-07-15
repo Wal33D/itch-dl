@@ -19,11 +19,13 @@ export async function loadKeysAndUrls(client: ItchApiClient): Promise<void> {
     if (!data.owned_keys) {
       break;
     }
-    for (const k of data.owned_keys) {
+    // Handle case where owned_keys is an object instead of array (when empty)
+    const ownedKeys = Array.isArray(data.owned_keys) ? data.owned_keys : [];
+    for (const k of ownedKeys) {
       DOWNLOAD_KEYS[k.game_id] = k.id;
       GAME_URLS.push(k.game.url);
     }
-    if (data.owned_keys.length === data.per_page) {
+    if (ownedKeys.length === data.per_page) {
       page += 1;
     } else {
       break;
