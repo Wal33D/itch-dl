@@ -9,7 +9,7 @@
     "test": "npm run build && node --test build/tests/test-config.js build/tests/test-downloader.js build/tests/test-handlers.js build/tests/test-infobox.js build/tests/test-keys.js build/tests/test-utils.js",
     "itch-dl": "node build/src/index.js",
     "clean": "rm -rf build",
-    "prepare": "npm run build",
+    "prepare": "husky",
     "lint": "eslint . --ext .ts --fix",
     "lint:check": "eslint . --ext .ts",
     "format": "prettier --write .",
@@ -42,24 +42,26 @@
     "LICENSE"
   ],
   "dependencies": {
+    "adm-zip": "^0.5.16",
     "axios": "^1.10.0",
     "axios-retry": "^3.7.0",
     "cheerio": "^1.0.0-rc.12",
     "cli-progress": "^3.12.0",
     "commander": "^12.1.0",
     "minimatch": "^9.0.1",
-    "adm-zip": "^0.5.16",
     "tar": "^7.4.3"
   },
   "devDependencies": {
-    "@types/node": "^24.0.13",
-    "typescript": "^5.8.3",
     "@types/adm-zip": "^0.5.7",
+    "@types/node": "^24.0.13",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
+    "audit-ci": "^7.0.1",
     "eslint": "^8.57.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.2.5",
-    "audit-ci": "^7.0.1"
+    "typescript": "^5.8.3"
   },
   "repository": {
     "type": "git",
@@ -71,5 +73,13 @@
   },
   "bin": {
     "itch-dl": "build/src/index.js"
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md,yml,yaml}": [
+      "prettier --write"
+    ],
+    "*.{ts,js}": [
+      "eslint --fix"
+    ]
   }
 }

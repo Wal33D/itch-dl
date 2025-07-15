@@ -340,6 +340,8 @@ file for details.
 
 **Made with ❤️ for the itch.io community**
 
+_Pre-commit hooks enabled for code quality assurance_
+
 _If this tool helped you, consider ⭐ starring the repository!_
 
 </div>
