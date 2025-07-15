@@ -133,12 +133,13 @@ For new features:
 
 ## 🎯 Areas for Contribution
 
-- **Bug fixes**: Check open issues
+- **Bug fixes**: Check open issues for known problems
 - **Performance improvements**: Optimize download speed or memory usage
 - **Platform support**: Improve cross-platform compatibility
 - **Documentation**: Improve README, wiki, or code comments
-- **Tests**: Increase test coverage
+- **Tests**: Increase test coverage and add edge cases
 - **CI/CD**: Improve automation and workflows
+- **Security**: Review code for potential vulnerabilities
 
 ## 💡 Getting Help
 
