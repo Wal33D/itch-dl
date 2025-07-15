@@ -178,7 +178,7 @@ itch-dl --help
   [itch.io API Keys](https://itch.io/user/settings/api-keys)
 - Pass it with `--api-key YOUR_KEY` or set `ITCH_API_KEY` environment variable
 
-#### "TypeError: data.owned_keys is not iterable" _(Fixed in v0.6.4)_
+#### "TypeError: data.owned*keys is not iterable" *(Fixed in v0.6.4)\_
 
 - This was resolved in version 0.6.4
 - Update to the latest version: `npm update -g itch-dl`
