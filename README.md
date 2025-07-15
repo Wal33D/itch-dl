@@ -206,6 +206,16 @@ If you encounter issues:
 2. Review the [wiki documentation](https://github.com/Wal33D/itch-dl/wiki)
 3. Create a new issue with details about your problem
 
+### 🧪 Help Wanted: Testing
+
+**We need community help!** We've tested extensively with free games, but need testers who have:
+
+- **💰 Purchased games** on itch.io to test paid game downloads
+- **📦 Bundle access** to test bundle functionality (currently unsupported)
+- **🔐 Access-restricted games** to verify behavior
+
+See our [Testing Request Discussion](https://github.com/Wal33D/itch-dl/discussions) or check the [Tested Games wiki](https://github.com/Wal33D/itch-dl/wiki/Tested-Games#-help-wanted-advanced-testing) for details!
+
 ---
 
 ## 📚 Documentation
